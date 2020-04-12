@@ -1,0 +1,93 @@
+package twoSum;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class TwoSum_Solution {
+
+	public static void main(String[] args) {
+		TwoSum_Solution obj = new TwoSum_Solution();
+		int [] arr = {2,7,11,15};
+		System.out.println(Arrays.toString(obj.twoSum_4(arr, 9)));
+	}
+	
+	/*Approach 1 : Brute Force
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(1)
+	*/
+	public int[] twoSum_1(int[] nums, int target) {
+	    for (int i = 0; i < nums.length; i++) {
+	        for (int j = i + 1; j < nums.length; j++) {
+	            if (nums[j] == target - nums[i]) {
+	                return new int[] { i, j };
+	            }
+	        }
+	    }
+	    throw new IllegalArgumentException("No two sum solution");
+	}
+	
+	/*Approach 2 : Two-pass Hash Table
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	*/
+	public int[] twoSum_2(int[] nums, int target) {
+		Map<Integer, Integer> map = new HashMap<>();
+	    for (int i = 0; i < nums.length; i++) {
+	    	map.put(nums[i] , i);
+	    }
+	    
+	    for(int i = 0; i < nums.length; i++){
+	    	int complement = target - nums[i];
+	    	if(map.containsKey(complement)){
+	    		return new int[]{i, map.get(complement)};
+	    	}
+	    }
+	    throw new IllegalArgumentException("No two sum solution");
+	}
+	
+	/*Approach 3 : One-pass Hash Table
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	*/
+	public int[] twoSum_3(int[] nums, int target) {
+		Map<Integer, Integer> map = new HashMap<>();
+	    for (int i = 0; i < nums.length; i++) {
+	    	int complement = target - nums[i];
+	    	if(map.containsKey(complement)){
+	    		return new int[]{i, map.get(complement)};
+	    	}
+	    	map.put(nums[i] , i);
+	    }
+	    throw new IllegalArgumentException("No two sum solution");
+	}
+	
+	/*Approach 3 : Sorting and Two Pointers
+	 * Time Complexity: O(nLog(n))
+	 * Space Complexity: O(n)
+	*/
+	public int[] twoSum_4(int[] nums, int target) {
+		Arrays.sort(nums);
+		int x = 0;
+		int y = nums.length-1;
+		while(x<y){
+			int sum = nums[x] + nums[y];
+			if(sum == target){
+				return new int[]{x, y};
+			}else if(sum > target){
+				y--;
+			}else{
+				x++;
+			}
+		}
+		/*Map<Integer, Integer> map = new HashMap<>();
+	    for (int i = 0; i < nums.length; i++) {
+	    	int complement = target - nums[i];
+	    	if(map.containsKey(complement)){
+	    		return new int[]{i, map.get(complement)};
+	    	}
+	    	map.put(nums[i] , i);
+	    }*/
+	    throw new IllegalArgumentException("No two sum solution");
+	}
+}

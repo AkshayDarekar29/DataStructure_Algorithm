@@ -1,0 +1,60 @@
+package threeSum;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import twoSum.TwoSum_Solution;
+
+public class ThreeSum_Solution {
+	
+	public static void main(String[] args) {
+		ThreeSum_Solution obj = new ThreeSum_Solution();
+		int [] arr = {-1, 0, 1, 2, -1, -4};
+		List<List<Integer>> x  = obj.threeSum(arr);
+		for (List<Integer> list : x) {
+			System.out.println(list.toString());
+		}
+	}
+	
+	/*Approach 1 : Sorting and Two Pointers
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(n) - Not Sure
+	 * There are other approaches also. Please check your code submissions in LeetCode 
+	*/
+	public List<List<Integer>> threeSum(int[] nums) {
+		
+		Arrays.sort(nums);
+        List<List<Integer>> finalList = new ArrayList<>();
+        Set<List<Integer>> finalSet = new HashSet<>();
+		for (int j = 0; j < nums.length-2; j++) {
+            if(j>0 && (nums[j] == nums[j-1])){ 
+                continue;
+            }
+            int x = j+1;
+            int y = nums.length-1;
+            while(x<y){
+                int sum = nums[j] + nums[x] + nums[y];
+                if(sum == 0){
+                    List<Integer> list = Arrays.asList(nums[j],nums[x],nums[y]);
+                    if(!finalSet.contains(list)){                                                    
+                        finalSet.add(list);
+                        finalList.add(list);
+                    }
+                    x++;
+                    y--;
+                   
+                }else if(sum > 0){
+                    y--;
+                }else {
+                    x++;
+                }
+            }
+		}
+		return finalList;
+    }
+}
