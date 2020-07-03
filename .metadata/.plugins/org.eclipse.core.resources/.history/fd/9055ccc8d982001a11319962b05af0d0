@@ -1,0 +1,47 @@
+package linkedList.reverseNodeInKGroups;
+
+import linkedList.ListNode;
+
+public class ReverseNodeInKGroups {
+	public ListNode reverseKGroup(ListNode head, int k) {
+		ListNode sizeList = head;
+        int len = 0;
+        while(sizeList != null){
+            len++;
+            sizeList = sizeList.next;
+        }
+        ListNode curr = head;
+        ListNode N = null;
+        ListNode P = null;
+        ListNode x = null;
+        int counter = 0;
+        while(counter != (len - len%k)){
+        	N = curr.next;
+        	curr.next = P;
+        	P = curr;
+        	curr = N;
+            counter++;
+            
+            if(counter%k == 0){
+                if(x == null){
+                    x = P;
+                }
+                else{
+                    ListNode temp = x;
+                    while(temp.next != null){
+                        temp = temp.next;
+                    }
+                    temp.next = P;
+
+                }  
+                P = null;
+            }
+        } 
+        ListNode temp = x;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = N;   
+        return x;
+    }	
+}

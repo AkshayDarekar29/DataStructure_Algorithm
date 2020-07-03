@@ -1,0 +1,40 @@
+package general;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Test {
+	public static void main(String args[]) 
+    { 
+		Test obj = new Test();
+		int [] input = {1,2,3};
+		obj.permute(input);
+    }	
+	
+	public List<List<Integer>> list = new ArrayList<>();
+    public List<List<Integer>> permute(int[] nums) {
+        permuteNew(nums, 0, nums.length-1);
+        return list;
+    }
+    
+    public void permuteNew(int[] nums, int l, int r) {
+        if(l == r){
+            list.add((List)Arrays.asList(nums));
+        }else{
+           for(int i = l; i <= r; i++){
+               nums = swap(nums, l, i);
+               permuteNew(nums, l+1, r);
+               nums = swap(nums, l, i);
+           }
+        }       
+    }
+    
+    public int[] swap(int [] input, int l, int i){
+        int temp = input[l];
+        input[l] = input[i];
+        input[i] = temp;
+        return input;
+    }
+	
+}

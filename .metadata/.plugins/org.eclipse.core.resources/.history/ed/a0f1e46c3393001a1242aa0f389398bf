@@ -1,0 +1,37 @@
+package tree.ConstructBTFromPostorderAndInorder;
+
+import tree.TreeNode;
+
+public class ConstructBTFromPostorderAndInorder {
+	
+	/*Approach 1 : Recursion
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	int postIndex;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        postIndex = postorder.length-1;
+        return build(inorder, postorder, 0, postorder.length-1);
+    }
+    
+    public TreeNode build(int[] in, int[] post, int l, int h){
+        if(postIndex < 0 || l > h){
+            return null;
+        }
+        TreeNode node = new TreeNode(post[postIndex]);
+        postIndex--;
+        if(l == h){
+            return node;
+        }
+        int i;
+        for(i=l; i <= h; i++){
+            if(node.val == in[i]){
+                break;
+            }
+        }
+        node.right = build(in, post, i+1, h);
+        node.left = build(in, post, l, i-1);
+        
+        return node;
+    }
+}

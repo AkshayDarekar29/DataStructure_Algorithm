@@ -1,0 +1,59 @@
+package stackPrefixEvaluation;
+
+import java.util.HashSet;
+import java.util.Stack;
+
+public class PrefixEvaluation {
+	public static void main(String[] args) {
+		PrefixEvaluation obj = new PrefixEvaluation();
+		String exp = "+-1 4 12";
+		double result = obj.evaluatePrefix(exp);
+		System.out.println(result);
+	}
+
+	private double evaluatePrefix(String exp) {
+		
+		Stack<Double> values =  new Stack<>();	
+		HashSet<Character> opsSet = new HashSet<>();
+		opsSet.add('+');
+		opsSet.add('-');
+		opsSet.add('*');
+		opsSet.add('/');
+		for( int i = exp.length()-1; i>=0; i--){
+			if(exp.charAt(i) == ' '){
+				continue;
+			}else if(exp.charAt(i) >= '0' && exp.charAt(i) <= '9' || exp.charAt(i) == '.'){
+				StringBuilder sb = new StringBuilder();
+				while(i >=0 && exp.charAt(i) != ' ' && !opsSet.contains(exp.charAt(i))){
+					sb.append(exp.charAt(i));
+					i--;
+				}
+				i++;
+				values.push(Double.parseDouble(sb.reverse().toString()));
+			}else if(opsSet.contains(exp.charAt(i))){
+				double n1 = values.pop();
+				double n2= values.pop();
+				double result = applyOperation(n1, n2, exp.charAt(i));
+				values.push(result);
+			}
+		}
+		return values.pop();
+	}
+	
+	private double applyOperation(double n1, double n2, Character operator) {
+		switch(operator){
+			case '+':
+				return n1+n2;
+			case '-':
+				return n1-n2;
+			case '*':
+				return n1*n2;
+			case '/':
+				if(n2 == 0){
+					throw new UnsupportedOperationException();
+				}
+				return n1/n2;
+		}
+		return 0;
+	}
+}

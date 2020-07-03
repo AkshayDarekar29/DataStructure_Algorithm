@@ -1,0 +1,8 @@
+package trappingRainWater;
+
+public class TrappingRainWater {
+	public static void main(String[] args) {
+		TrappingRainWater obj = new TrappingRainWater();
+		
+	}
+}

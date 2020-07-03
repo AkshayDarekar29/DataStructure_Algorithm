@@ -1,0 +1,13 @@
+ package dynamicProgramming.NthCatalanNumber;
+
+public class NthCatalanNumber {
+	
+	/*Approach 1 : Without DP
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(1)
+	*/
+	public int findNthCatalanNumber(){
+		
+		return 0;
+	}
+}

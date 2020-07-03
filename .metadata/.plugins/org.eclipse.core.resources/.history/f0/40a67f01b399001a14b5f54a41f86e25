@@ -1,0 +1,33 @@
+package dynamicProgramming.SubsetSum;
+
+import java.util.Arrays;
+
+public class SubsetSum {
+	public static void main(String[] args) {
+		SubsetSum obj = new SubsetSum();
+		int[] arr = {3,5,8,2,1,15};
+		int target = 200;
+		boolean ans = obj.isSubsetSum(arr, target, 0);
+		System.out.println(ans);
+	}
+
+	private boolean isSubsetSum(int[] arr, int target, int start) {
+		if(target < 0){
+			return false;
+		}else if(target == 0){
+			return true;
+		}else{
+			for(int i = start; i < arr.length-1; i++){
+				if(isSubsetSum(arr, target-arr[i], i+1)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	/*Approach 1 : Bottom-Up
+	 * Time Complexity: w.length*capacity
+	 * Space Complexity: w.length*capacity
+	*/
+}

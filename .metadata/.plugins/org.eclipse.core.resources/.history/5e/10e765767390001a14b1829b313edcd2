@@ -1,0 +1,48 @@
+package tree.FlattenBinaryTreeToLinkedList;
+
+import java.util.List;
+
+import tree.TreeNode;
+
+public class FlattenBinaryTreeToLinkedList {
+	
+	/*Approach 1 : DFS - Reverse pre-order
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	TreeNode prev = null;
+    public void flatten(TreeNode root) {
+        if(root == null){
+            return;
+        }
+        flatten(root.right);
+        flatten(root.left);
+        root.right = prev;
+        root.left = null;
+        prev = root;
+    }
+    
+    /*Approach 1 : DFS - Reverse pre-order
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+    List<Integer> list = new ArrayList<>();
+    public void flatten_2(TreeNode root) {
+        if(root != null){
+            dfs(root);
+            root.left = null;
+            root.right = null;
+            for(int i=1; i<list.size(); i++){
+                root.right = new TreeNode(list.get(i));
+                root = root.right;
+            }
+        }
+    }
+    
+    public void dfs(TreeNode root){
+        if(root == null){
+            return;
+        }
+        list.add(root.val);
+        dfs(root.left);
+        dfs(root.right);
+    }
+}

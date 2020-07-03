@@ -1,0 +1,16 @@
+package heap.SortNearlySortedArray;
+
+import java.util.PriorityQueue;
+
+public class SortNearlySortedArray {
+	public int [] sort(int[] nums, int k){
+		PriorityQueue<Integer> q = new PriorityQueue<>(k);
+		int [] res = new int[nums.length];
+		for(int i=0; i< nums.length; i++){
+			if(q.size() == k){
+				res[i-k] = q.poll();
+			}
+		}
+		return res;
+	}
+}

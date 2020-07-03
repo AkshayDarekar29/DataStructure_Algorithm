@@ -1,0 +1,113 @@
+package arrays.minimumSizeWindow;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MinimumSizeWindow {
+	
+	public static void main(String[] args) {
+		MinimumSizeWindow obj = new MinimumSizeWindow();
+		int [] arr = {1,1,1,0,4,1,2,0,2,2};
+		int minWindow = obj.minWindow_3(arr);
+		System.out.println(minWindow);
+	}
+	
+	/*Approach 1 : Hashmap
+	 * 
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	*/
+	public int minWindow_3(int [] arr) {
+
+		int start =0, end = 0, aStart = 0, aEnd=0;
+		Map<Integer, Integer> count = new HashMap<>();
+		int answer = Integer.MAX_VALUE;
+		
+		while(end  < arr.length){
+			if(count.containsKey(arr[end])){
+				count.put(arr[end], count.get(arr[end])+ 1);
+			}else{
+				count.put(arr[end], 1);
+			}
+			while(count.get(arr[end]) == 3){
+				//if(arr[start] == arr[end]){
+					answer = Math.min(answer, end-start+1);
+					count.put(arr[start], count.get(arr[start]) - 1);
+					aStart = start;
+					aEnd = end;
+				//}
+				start++;
+			}
+			end++;
+		}
+		System.out.println("Start ="+ aStart + "| End=" + aEnd);
+		return answer;
+	}
+	/*Approach 2 : Two Pointers
+	 * 
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(1)
+	*/
+	public int minWindow_2(int [] arr) throws Exception{
+		int counter = 1;
+		int minWindow = Integer.MAX_VALUE;
+		int l = arr.length;
+		int start = 0;
+		int end = 0;
+		int i = 0;
+		int j = i+1;
+		while(i < l-2){
+			if(arr[i] == arr[j]){
+				counter++;
+			}
+			if(counter == 3 && minWindow > j-i+1){
+				minWindow = j-i+1;
+				start = i;
+				end = j;
+			}
+			if(j<l-1){
+				j++;
+			}else{
+				i++;
+				j = i+1;
+				counter = 1;
+			};
+		}
+		if(minWindow == Integer.MAX_VALUE){
+			throw new Exception("");
+		}
+		System.out.println("Start ="+ start + "| End=" + end);
+		return minWindow;
+	}
+	
+	/*Approach 3 : Brute-Force
+	 * 
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(1)
+	*/
+	public int minWindow(int [] arr) throws Exception{
+		int counter;
+		int minWindow = Integer.MAX_VALUE;
+		int l = arr.length;
+		int start = 0;
+		int end = 0;
+		for(int i = 0; i< l-2; i++){
+			counter = 1;
+			for(int j = i+1; j < l; j++){
+				if(arr[i] == arr[j]){
+					counter++;
+				}
+				if(counter == 3 && minWindow > j-i+1){
+					minWindow = j-i+1;
+					start = i;
+					end = j;
+				}
+			}
+		}
+		if(minWindow == Integer.MAX_VALUE){
+			throw new Exception("");
+		}
+		System.out.println("Start ="+ start + "| End=" + end);
+		return minWindow;
+	}
+}

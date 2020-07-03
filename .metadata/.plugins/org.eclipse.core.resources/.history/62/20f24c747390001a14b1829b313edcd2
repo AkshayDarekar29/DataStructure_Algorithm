@@ -1,0 +1,21 @@
+package tree.FlattenBinaryTreeToLinkedList;
+
+import tree.TreeNode;
+
+public class FlattenBinaryTreeToLinkedList {
+	
+	/*Approach 1 : DFS - Reverse pre-order
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	TreeNode prev = null;
+    public void flatten(TreeNode root) {
+        if(root == null){
+            return;
+        }
+        flatten(root.right);
+        flatten(root.left);
+        root.right = prev;
+        root.left = null;
+        prev = root;
+    }
+}

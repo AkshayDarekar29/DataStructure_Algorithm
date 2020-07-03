@@ -1,0 +1,56 @@
+package graph.CloneGraph;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class CloneGraph {
+	
+	/* Approach 1 : BFS
+	 * Time Complexity : O(n2)
+	 * Space Complexity : O(n)
+	 */
+	public Node cloneGraph(Node node) {
+        if(node == null){
+            return null;
+        }
+        Queue<Node> q = new LinkedList<>();
+        q.offer(node);
+        HashMap<Integer, Node> map = new HashMap<>();
+        Node result = new Node(node.val); 
+        map.put(node.val, result);
+        while(!q.isEmpty()){
+            Node curr = q.poll();
+            for(Node neighbors : curr.neighbors){
+                if(!map.containsKey(neighbors.val)){
+                    map.put(neighbors.val, new Node(neighbors.val));
+                    q.offer(neighbors);
+                }
+                map.get(curr.val).neighbors.add(map.get(neighbors.val));
+            }
+        }
+        return result;
+    }
+}
+
+class Node {
+    public int val;
+    public List<Node> neighbors;
+    
+    public Node() {
+        val = 0;
+        neighbors = new ArrayList<Node>();
+    }
+    
+    public Node(int _val) {
+        val = _val;
+        neighbors = new ArrayList<Node>();
+    }
+    
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}

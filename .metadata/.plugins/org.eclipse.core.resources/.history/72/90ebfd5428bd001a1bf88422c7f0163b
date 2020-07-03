@@ -1,0 +1,49 @@
+package tree.PostorderTraversal;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
+import tree.TreeNode;
+
+public class PostorderTraversal {
+	
+	/*Approach 1 : Recursion
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	List<Integer> list = new ArrayList<>();
+	public List<Integer> postorderTraversal_Recursion( TreeNode root){
+		if(root != null){
+			postorderTraversal_Recursion(root.left);
+			postorderTraversal_Recursion(root.right);
+			list.add(root.val);
+		}
+		return list;
+	}
+	
+	/*Approach 2 : Iteration
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	public List<Integer> preorderTraversal_Iteration( TreeNode root){
+		List<Integer> l = new LinkedList<>();
+		if(root == null){
+            return l;
+        }
+		Stack<TreeNode> stack = new Stack<>();
+		stack.push(root);
+		while(!stack.empty()){
+			TreeNode curr = stack.pop();
+			((LinkedList<Integer>) l).addFirst(curr.val);
+			if(curr.left != null){
+				stack.push(curr.left);
+			}
+			if(curr.right != null){
+				stack.push(curr.right);
+			}
+		}
+		return l;
+	}
+}

@@ -1,0 +1,19 @@
+package trappingRainWater;
+
+public class TrappingRainWater {
+	public static void main(String[] args) {
+		TrappingRainWater obj = new TrappingRainWater();
+		int arr [] = {0,1,0,2,1,0,1,3,2,1,2,1};
+		int units = obj.trappedWater(arr);
+		System.out.println(units);
+	}
+
+	private int trappedWater(int[] arr) {
+		int l = arr.length;
+		int [] left = new int[l];
+		int [] right = new int[l];
+		int units = 0;
+		
+		return 0;
+	}
+}

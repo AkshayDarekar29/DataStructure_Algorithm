@@ -1,0 +1,20 @@
+1588330677018	Infer generic type arguments
+1588334974562	Copy package
+1588334985409	Rename type 'RomanToInteger'
+1588334994533	Rename resource 'RomanToInteger_Description'
+1588342482473	Copy package
+1588342502429	Rename type 'PermutationsOfArray'
+1588342509764	Rename resource 'PermutationsOfArray_Description'
+1588413573292	Copy package
+1588413600904	Rename package 'backtracking.KnightTour'
+1588413610817	Rename type 'KnightTour'
+1588413618614	Rename resource 'KnightTour_Description'
+1588430644776	Copy package
+1588430653294	Rename type 'NQueen'
+1588430660370	Rename resource 'NQueen_Description'
+1588436005199	Copy package
+1588436011879	Rename type 'CombinationSum'
+1588436019490	Rename resource 'CombinationSum_Description'
+1588440071026	Copy package
+1588440078574	Rename type 'PalindromePartition'
+1588440091720	Rename resource 'PalindromePartition_Description'

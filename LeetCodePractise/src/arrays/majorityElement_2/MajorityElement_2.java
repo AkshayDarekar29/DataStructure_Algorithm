@@ -1,0 +1,82 @@
+package arrays.majorityElement_2;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class MajorityElement_2 {
+	public static void main(String[] args) {
+		MajorityElement_2 obj = new MajorityElement_2();
+		int[] nums = { 1, 1, 1, 3, 3, 3, 2, 2 };
+		List<Integer> list = obj.majorityElement_1(nums);
+		System.out.println(list.toString());
+	}
+
+	/*
+	 * Approach 1 : Boyer-Moore Voting Algorithm
+	 * Time Complexity: O(n) 
+	 * Space Complexity:
+	 */
+	public List<Integer> majorityElement_1(int[] nums) {
+		int cnt1 = 0, cnt2 = 0;
+
+		int a = 0;
+		int b = 0;
+		for (int n : nums) {
+			if (n == a)
+				cnt1++;
+			else if (n == b)
+				cnt2++;
+			else if (cnt1 == 0) {
+				cnt1++;
+				a = n;
+			} else if (cnt2 == 0) {
+				cnt2++;
+				b = n;
+			} else {
+				cnt1--;
+				cnt2--;
+			}
+		}
+		cnt1 = cnt2 = 0;
+		for (int n : nums) {
+			if (n == a)
+				cnt1++;
+			else if (n == b)
+				cnt2++;
+		}
+		// System.out.println(a + " "+ b);
+		List<Integer> result = new ArrayList<>();
+		if (cnt1 > nums.length / 3)
+			result.add(a);
+		if (cnt2 > nums.length / 3)
+			result.add(b);
+		return result;
+	}
+
+	/*
+	 * Approach 1 : HashMap
+	 * Time Complexity: O(n2) 
+	 * Space Complexity
+	 */
+
+	public List<Integer> majorityElement_2(int[] nums) {
+		HashMap<Integer, Integer> map = new HashMap<>();
+		int n = nums.length / 3;
+		for (int x : nums) {
+			if (map.containsKey(x)) {
+				map.put(x, map.get(x) + 1);
+			} else {
+				map.put(x, 1);
+			}
+		}
+		List<Integer> list = new ArrayList<>();
+		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+			if (entry.getValue() > n) {
+				list.add(entry.getKey());
+			}
+		}
+		return list;
+	}
+}

@@ -1,0 +1,111 @@
+ package dynamicProgramming.CoinChange;
+
+import java.util.Arrays;
+
+public class CoinChange {
+	
+	public static void main(String[] args) {
+		CoinChange obj = new CoinChange();
+		int [] arr = {470,18,66,301,403,112,360};
+		int amount = 8235;
+		int value = obj.coinChange(arr, amount);
+		System.out.println(value);
+	}
+	/*Approach 1 : Brute-Force
+	 * Time Complexity: coins.length^amount
+	 * Space Complexity: 
+	 */
+	int minValue = Integer.MAX_VALUE;
+    public int coinChange(int[] coins, int amount) {
+        coinChange2(coins, amount, coins.length-1, 0);
+        return minValue == Integer.MAX_VALUE ? -1 : minValue;
+    }
+    
+    public void coinChange2(int[] coins, int amount, int start, int count) {
+        if(amount < 0){
+            return;
+        }else if(amount == 0 && minValue > count){
+            minValue = count;
+        }else{
+            for(int i = start; i >= 0; i--){
+                coinChange2(coins, amount-coins[i], i, count+1);
+            }
+        }
+    }	
+    
+    /*Approach 2 : Bottom-up
+	 * Time Complexity: coins.length*amount
+	 * Space Complexity: coins.length*amount
+	 */
+    public int coinChange_2(int[] coins, int amount) {
+        int [][] dp = new int[coins.length][amount+1];
+        for(int [] n : dp){
+            Arrays.fill(n, -1);
+        }
+        for(int i=0; i <= amount; i++){
+            if(i%coins[0] == 0){
+                dp[0][i] = i/coins[0];
+            }else{
+                dp[0][i] = Integer.MAX_VALUE;
+            }
+        }
+        for(int i=0; i< coins.length; i++){
+            dp[i][0] = 0;
+        }
+        for(int i = 1; i < coins.length; i++){
+            for(int j = 1;  j <= amount; j++){
+                if(j - coins[i] >= 0 && dp[i][j-coins[i]] != Integer.MAX_VALUE){
+                    dp[i][j] = Math.min(dp[i-1][j], 1 + dp[i][j-coins[i]]);
+                }else{
+                    dp[i][j] = dp[i-1][j];
+                }  
+            }
+        }
+        /*for(int [] n : dp){
+            System.out.println(Arrays.toString(n));
+        }*/
+        return dp[coins.length-1][amount] == Integer.MAX_VALUE ? -1 : dp[coins.length-1][amount];
+    }
+    
+    
+    /*Approach 3 : Top-Down
+	 * Time Complexity: coins.length*amount
+	 * Space Complexity: coins.length*amount + stack space
+	 */
+    int [][] dp;
+    public int coinChange_3(int[] coins, int amount) {
+        dp = new int[coins.length][amount+1];
+        for(int [] n : dp){
+            Arrays.fill(n, -1);
+        }
+        coinChange2(coins, amount, coins.length-1);
+        /*for(int [] n : dp){
+            System.out.println(Arrays.toString(n));
+        }*/
+        return dp[coins.length-1][amount] == Integer.MAX_VALUE ? -1 : dp[coins.length-1][amount];
+    }
+    
+    public int coinChange2(int[] coins, int amount, int coinIdx) {
+        if(coinIdx < 0 || amount < 0){
+            return Integer.MAX_VALUE;
+        }else if(dp[coinIdx][amount] == -1){
+            if(coinIdx == 0 && amount%coins[coinIdx] == 0){
+                dp[0][amount] = amount/coins[0];
+                return amount/coins[0];
+            }else if(amount == 0){
+                dp[coinIdx][0] = 0;
+                return 0;
+            }else{
+                for(int i = coinIdx; i >= 0; i--){
+                    int val = coinChange2(coins, amount-coins[i], i);
+                    if( val !=  Integer.MAX_VALUE){
+                        dp[i][amount] = Math.min(coinChange2(coins, amount, i-1), 1 + val);
+                    }else{
+                        dp[i][amount] = coinChange2(coins, amount, i-1);
+                    }
+                }
+            }
+        }
+        return dp[coinIdx][amount];
+    }
+}

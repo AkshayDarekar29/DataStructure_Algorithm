@@ -1,0 +1,27 @@
+ package tree.SearchInBST;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import tree.TreeNode;
+
+public class SearchInBST {
+	/* Approach - Hashset
+	 * Time Complexity - O(n)
+	 * Space Complexity - O(n)
+	 */
+	public TreeNode searchBST(TreeNode root, int val) {
+        TreeNode curr = root;
+        while(curr != null){
+            if(curr.val == val){
+                break;
+            }else if(val < curr.val){
+                curr = curr.left;
+            }else{
+                curr = curr.right;
+            }
+        }
+        return curr;
+    }
+}

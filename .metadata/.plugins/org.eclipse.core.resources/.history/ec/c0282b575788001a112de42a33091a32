@@ -1,0 +1,47 @@
+package queue.LinearQueueUsingLinkedList;
+
+public class LinearQueueUsingLinkedList<E> {
+	ListNode<E> head;
+	ListNode<E> tail;
+	
+	public void enqueue(E item){
+		ListNode<E> temp = new ListNode<>(item);
+		if(tail == null){
+			tail = temp;
+			head = temp;
+		}else{
+			tail.next = temp;
+			tail = tail.next;
+		}
+	}
+	
+	public E dequeue(){
+		if(isEmpty()){
+			throw new IllegalStateException("Queue is Empty");
+		}
+		ListNode<E> temp = tail;
+		if(tail == null){
+			tail = temp;
+			head = temp;
+		}else{
+			tail.next = temp;
+			tail = tail.next;
+		}
+	}
+	
+	public boolean isEmpty(){
+		if(tail == null){
+			return true;
+		}
+		return false;
+	}
+}
+
+class ListNode<E> {
+    public E val;
+    public ListNode<E> next;
+    public ListNode(E x) {
+  	  val = x; 
+  	  next = null;
+    }    
+}

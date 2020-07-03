@@ -1,0 +1,36 @@
+package binarySearch.PowerOfNumber;
+
+public class PowerOfNumber {
+	public static void main(String[] args) {
+		PowerOfNumber obj = new PowerOfNumber();
+		double x = obj.myPow(2,10);
+		System.out.println(x);
+	}
+	/*
+	 * Approach 1 : Iteration
+	 * Time Complexity: O(log(n)) 
+	 * Space Complexity: O(1)
+	 */
+	public double myPow(double x, int n) {
+        int i = n;
+        int counter = 0;
+        double sqrt = x;
+        int j = 0;
+        while(i != 0){
+            if(i%2 != 0){
+                counter++;
+            }
+            i = i/2;
+            //sqrt = sqrt * sqrt;
+            j++;
+        }
+        while(j!=0){
+            j--;
+            sqrt = sqrt*sqrt;
+        }
+        System.out.println(sqrt);
+        System.out.println(counter);
+        return 0;
+    }
+	
+}

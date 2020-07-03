@@ -1,0 +1,5 @@
+package queue.LinearQueueUsingLinkedList;
+
+public class LinearQueueUsingLinkedList<E> {
+	
+}

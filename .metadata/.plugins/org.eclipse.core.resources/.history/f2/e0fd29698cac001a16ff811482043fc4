@@ -1,0 +1,161 @@
+package linkedList.palindromeLinkedList;
+
+import java.util.Stack;
+
+import linkedList.ListNode;
+
+public class PalindromeLinkedList {
+		 
+	public static void main(String[] args) {
+		ListNode head = ListNode.getSinglyLinkedList();
+		/*ListNode newH = new ListNode(10);
+		newH.next = head;*/
+		PalindromeLinkedList obj = new PalindromeLinkedList();
+		boolean palindrome = obj.isPalindrome_4(head);
+		System.out.println(palindrome);
+	}
+	
+	/*
+	 * Approach 1 : Iteration- stack
+	 * Time Complexity: O(n) 
+	 * Space Complexity: O(n)
+	 */
+	 public boolean isPalindrome(ListNode head) {
+        if(head == null) return true;
+        
+        ListNode slow = head;
+        ListNode fast = head;
+        Stack<ListNode> stack = new Stack<>();
+        while(fast != null && fast.next != null){
+            stack.push(slow);
+            slow = slow.next;
+            fast = fast.next.next;
+         
+            if(fast != null && fast.next == null){
+                slow = slow.next;
+            }
+        }
+        
+        if(stack.empty()) return true;
+        
+        while( !stack.empty() && slow != null){
+           if(slow.val != stack.pop().val){
+               return false;
+           } 
+            slow = slow.next;
+        }
+        
+        return true;
+    }
+	 
+	/*
+	 * Approach 2 : Iteration- reversing first half of list
+	 * Time Complexity: O(n) 
+	 * Space Complexity: O(1)
+	 */
+	 public boolean isPalindrome_2(ListNode head) {
+		 	ListNode slow = head;
+		 	ListNode fast = head;
+		 	int mid = 0;
+		 	boolean flag = false;
+		 	while(fast != null && fast.next != null){
+		 		mid++;
+		 		slow = slow.next;
+		 		fast = fast.next.next;
+		 		if(fast != null && fast.next == null){
+		 			flag = true;
+	            }
+		 	}
+		    ListNode curr = head;
+	        ListNode N = null;
+	        ListNode P = null;
+	        int counter = 0;
+	        while(counter < mid){
+	        	counter++;
+	        	N = curr.next;
+	        	curr.next = P;
+	        	P = curr;
+	        	curr = N;
+	        	if(flag && counter == mid ){
+	        		curr = curr.next;
+	        	}
+	        	
+	        }
+	        
+	        while(P != null){
+	        	if(P.val != curr.val){
+	        		return false;
+	        	}
+	        	P = P.next;
+	        	curr = curr.next;
+	        }
+	        
+		 return true;
+	 }
+	 
+	 /*
+	 * Approach 3 : Iteration- reversing second of of list
+	 * Time Complexity: O(n) 
+	 * Space Complexity: O(1)
+	 */
+	 public boolean isPalindrome_3(ListNode head) {
+		 if(head == null || head.next == null) {
+	            return true;
+	        }
+	        
+	        ListNode slow = head;
+	        ListNode fast = head;
+	        
+	        // Move slow pointer to the middle node of the LL 
+	        while(fast != null && fast.next != null) {
+	            slow = slow.next;
+	            fast = fast.next.next;
+	        }
+	        
+	        // If there are odd number of nodes, move slow to the node after the middle node
+	        if(fast != null) {
+	            slow = slow.next;
+	        }
+	        
+	        // Take the slow pointer and reverse the links of the 2nd half of the LL
+	        ListNode prev = null;
+	        while(slow != null) {
+	            ListNode tmp = slow.next;
+	            slow.next = prev;
+	            prev = slow;
+	            slow = tmp;
+	        }
+	        
+	        // Compare the reversed 2nd half LL with the 1st half LL 
+	        ListNode tmpHead = head;
+	        while(prev != null) {
+	            if(prev.val != tmpHead.val) {
+	                return false;
+	            }
+	            tmpHead = tmpHead.next;
+	            prev = prev.next;
+	        }
+	        return true;
+	 }
+	 
+	 /*
+	 * Approach 4 : Recursion
+	 * Time Complexity: O(n) 
+	 * Space Complexity: O(1)
+	 */
+	 ListNode node;
+	 
+	 public boolean isPalindrome_4(ListNode head) {
+	        if(head == null) return true;   
+	        if(node == null) node = head;   //node points at front
+	        
+	        boolean bool = isPalindrome_4(head.next); //send head to end
+	        
+	        if(head.val == node.val)    //compare the front and end nodes
+	            node = node.next;
+	        else
+	            bool = false;
+	        
+	        return bool;
+	    }
+}

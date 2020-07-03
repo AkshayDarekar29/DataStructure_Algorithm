@@ -1,0 +1,38 @@
+package binarySearch.SearchInRotatedSortedArray;
+
+public class SearchInRotatedSortedArray {
+	public static void main(String[] args) {
+		SearchInRotatedSortedArray obj = new SearchInRotatedSortedArray();
+		int arr [] = {4,5,6,7,8,9,0,1,2,3};
+		int x = obj.search(arr, 5);
+		System.out.println(x);
+	}
+	/*
+	 * Approach 1 : Iteration
+	 * Time Complexity: O(log(n)) 
+	 * Space Complexity: O(1)
+	 */
+	public int search(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length-1;
+        if(nums[start] < nums[end]){
+			return -1;
+		}
+		return findPivot(nums, start, end);
+    }
+	private int findPivot(int[] arr, int start, int end) {
+		int mid = (start+end)/2;
+		if(start == end){
+			return mid;
+		}
+		if(end >=  start){	
+			if(arr[start] < arr[mid]){
+				return findPivot(arr, mid, end);
+			}else{
+				return findPivot(arr, start, mid);
+			}
+		}
+		return mid;
+	}
+	
+}

@@ -1,0 +1,78 @@
+package tree.MirrorOfTree;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+import tree.TreeNode;
+
+public class MirrorOfTree {
+	
+	/*Approach 1 : DFS
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	public TreeNode invertTree(TreeNode root) {
+        if(root == null){
+            return null;
+        }
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
+    }
+	
+	/*Approach 2 : BFS 
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	public TreeNode invertTree_iteration(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        if(root == null){
+            return null;
+        }
+        q.offer(root);
+        while(!q.isEmpty()){
+            TreeNode node = q.poll();
+            if(node.left != null){
+                q.offer(node.left);
+            }
+            if(node.right != null){
+                q.offer(node.right);
+            }
+            TreeNode temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+        }
+        return root;
+    }
+	
+	/*Approach 3 : Iteration - BFS
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	public TreeNode invertTree_iteration2(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        if(root == null){
+            return null;
+        }
+        q.offer(root);
+        while(!q.isEmpty()){
+            int len = q.size();
+            for(int i=0; i<len; i++){
+                TreeNode node = q.poll();
+                if(node.left != null){
+                    q.offer(node.left);
+                }
+                if(node.right != null){
+                    q.offer(node.right);
+                }
+                TreeNode temp = node.left;
+                node.left = node.right;
+                node.right = temp;
+            }
+        }
+        return root;
+    }
+}

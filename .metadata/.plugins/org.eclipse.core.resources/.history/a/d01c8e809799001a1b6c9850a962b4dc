@@ -1,0 +1,77 @@
+ package dynamicProgramming.Knapsack_0_1;
+
+import java.util.Arrays;
+
+public class Knapsack_0_1 {
+	public static void main(String[] args) {
+		Knapsack_0_1 obj = new Knapsack_0_1();
+		/*int num = obj.BinomialCoe(8,2);
+		System.out.println(num);*/
+		int n = obj.BinomialCoe_3(8, 8);
+		System.out.println(n);
+		
+	}
+	
+	/*Approach 1 : Without DP
+	 * Time Complexity: Exponential
+	 * Space Complexity: O(1)
+	*/
+	public int BinomialCoe(int n, int k){
+		if(k == 0 || k==n){
+			return 1;
+		}
+		return BinomialCoe(n-1, k-1) + BinomialCoe(n-1, k);
+	}
+	
+	/*Approach 4 : Without DP
+	 * Time Complexity: O(n*k)
+	 * Space Complexity: O(n*k)
+	*/
+	public int BinomialCoe_4(int n, int k) {
+		if(k > n-k){
+			k = n-k;
+		}
+		int res = 1;
+		for(int i=0; i<k; i++){
+			res *= (n-i);
+			res /= (i+1);
+		}
+		return res;
+	}
+	
+	
+	/*Approach 2 : DP - Using 2D Array
+	 * Time Complexity: O(n*k)
+	 * Space Complexity: O(n*k)
+	*/
+	public int BinomialCoe_2(int n, int k){
+		int [][] C = new int[n+1][k+1];
+		
+		for (int i = 0; i <= n; i++) {
+			for (int j = 0; j <= Math.min(i,k); j++) {
+				if(j == 0 || j == i){
+					C[i][j] = 1;
+				}else{
+					C[i][j] = C[i-1][j-1] + C[i-1][j];
+				}
+			}
+		}
+		return C[n][k];
+	}
+	
+	/*Approach 3 : DP - Using 1D Array
+	 * Time Complexity: O(n*k)
+	 * Space Complexity: O(k)
+	*/
+	public int BinomialCoe_3(int n, int k){
+		int [] C = new int[k+1];
+		C[0] = 1;
+		for (int i = 0; i <= n; i++) {
+			for (int j = Math.min(i,k); j>0; j--) {
+				C[j] = C[j] + C[j-1];
+			}
+		}
+		System.out.println(Arrays.toString(C));
+		return C[k];
+	}
+}

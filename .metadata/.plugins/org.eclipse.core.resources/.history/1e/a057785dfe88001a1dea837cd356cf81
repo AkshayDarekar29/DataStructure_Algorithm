@@ -1,0 +1,14 @@
+package stack.InfixEvaluation;
+
+public class InfixEvaluation {
+	public static void main(String[] args) {
+		InfixEvaluation obj = new InfixEvaluation();
+		String exp = "100*2+4-4/8+20-4";
+		double result = obj.evaluateInfix();
+	}
+
+	private double evaluateInfix() {
+		
+		return 0;
+	}
+}

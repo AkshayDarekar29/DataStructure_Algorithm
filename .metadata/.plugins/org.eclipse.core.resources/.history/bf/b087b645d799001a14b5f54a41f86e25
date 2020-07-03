@@ -1,0 +1,26 @@
+package dynamicProgramming.CuttingARod;
+
+public class CuttingARod {
+	public static void main(String[] args) {
+		CuttingARod obj = new CuttingARod();
+		int len = 8;
+		int[] price = {5,5,8,9,10,17,17,20};
+		obj.maxCost(len,price,0);
+		System.out.println(maxCost);
+	}
+
+	/*Approach 1 : Brute-Force
+	 * Time Complexity: 
+	 * Space Complexity: 
+	*/
+	int maxCost = 0;
+	public void maxCost(int len, int[] price, int cost) {
+		if(cost > maxCost){
+			maxCost = cost;
+		}
+		for (int i = 0; i < len; i++) {
+			maxCost(len-i, price, cost+price[i]);
+		}
+	}
+
+}

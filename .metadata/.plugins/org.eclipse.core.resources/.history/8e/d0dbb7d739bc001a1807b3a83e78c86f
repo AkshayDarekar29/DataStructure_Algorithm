@@ -1,0 +1,70 @@
+package backtracking.PermutationsOfArray;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class PermutationsOfArray {
+	
+	public static void main(String args[]) 
+    { 
+		PermutationsOfArray obj = new PermutationsOfArray();
+		int [] input = {1,2,3};
+		obj.permute(input);
+    }	
+	/*Approach 1 : Backtracking
+	 * 
+	 * Time Complexity: O(n^2*n!)
+	 * - For any given string of length n there are n! possible permutations, 
+	 *   and time required to print one of them is O(n)so Time complexity is O(n* n!)
+	 * Space Complexity: O(n) - If we consider implicit space
+	*/
+	public List<List<Integer>> list = new ArrayList<>();
+    public List<List<Integer>> permute(int[] nums) {
+        permuteNew(nums, 0, nums.length-1);
+        return list;
+    }
+    
+    public void permuteNew(int[] nums, int l, int r) {
+        if(l == r){
+            List<Integer> temp = new ArrayList<Integer>(nums.length);
+            for (int i : nums)
+            {
+                temp.add(i);
+            }
+            list.add(temp);
+        }else{
+           for(int i = l; i <= r; i++){
+               swap(nums, l, i);
+               permuteNew(nums, l+1, r);
+               swap(nums, l, i);
+           }
+        }       
+    }
+    
+    public void swap(int [] input, int l, int i){
+        int temp = input[l];
+        input[l] = input[i];
+        input[i] = temp;
+    }
+    
+    public List<List<Integer>> permute2(int[] nums) {
+	   List<List<Integer>> list = new ArrayList<>();
+	   // Arrays.sort(nums); // not necessary
+	   backtrack(list, new ArrayList<>(), nums);
+	   return list;
+    }
+
+	private void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] nums){
+	   if(tempList.size() == nums.length){
+	      list.add(new ArrayList<>(tempList));
+	   } else{
+	      for(int i = 0; i < nums.length; i++){ 
+	         if(tempList.contains(nums[i])) continue; // element already exists, skip
+	         tempList.add(nums[i]);
+	         backtrack(list, tempList, nums);
+	         tempList.remove(tempList.size() - 1);
+	      }
+	   }
+	}
+}

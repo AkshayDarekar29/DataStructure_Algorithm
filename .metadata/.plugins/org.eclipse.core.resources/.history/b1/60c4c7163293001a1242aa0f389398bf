@@ -1,0 +1,71 @@
+ package tree.BalancedBinaryTree;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+import tree.TreeNode;
+
+public class BalancedBinaryTree {
+	
+	/*Approach 3 : BFS
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	public boolean isBalanced_2(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            TreeNode node = q.poll();
+            if(node != null){
+                q.offer(node.left);
+                q.offer(node.right);
+                int l = maxDepth_recursion(node.left);
+                int r =  maxDepth_recursion(node.right);
+                if(Math.abs(l-r) > 1){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public int maxDepth_recursion(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return 1 + Math.max(maxDepth_recursion(root.left), maxDepth_recursion(root.right));
+    }
+    
+    /*Approach 3 : DFS
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+    public boolean isBalanced(TreeNode root) {
+        if(root == null){                                  
+            return true;
+        }
+        int l = maxDepth_recursion(root.left);
+        int r =  maxDepth_recursion(root.right);
+        return (Math.abs(l-r) > 1 ? false : true) && isBalanced(root.left) && isBalanced(root.right);
+    }
+    
+    private boolean result = true;
+
+    public boolean isBalanced_3(TreeNode root) {
+        maxDepth(root);
+        return result;
+    }
+
+    public int maxDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        int l = maxDepth(root.left);
+        int r = maxDepth(root.right);
+        if (Math.abs(l - r) > 1)
+            result = false;
+        return 1 + Math.max(l, r);
+    }
+}

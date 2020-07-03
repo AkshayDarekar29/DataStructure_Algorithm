@@ -1,0 +1,62 @@
+package arrays.medianOfTwoSortedArrays;
+
+import java.util.Arrays;
+
+public class MedianOfTwoSortedArrays {
+	public static void main(String[] args) {
+		MedianOfTwoSortedArrays obj = new MedianOfTwoSortedArrays();
+		int[] nums1 = { 1, 3, 5,7,9 };
+		int[] nums2 = { 0,2,4,6,8 };
+		double median = obj.findMedianSortedArrays(nums1, nums2);
+		System.out.println("Median is " + median);
+	}
+
+	/*
+	 * Approach 1 :
+	 * 
+	 * Time Complexity: O(m+n) Space Complexity: O(m+n)
+	 */
+	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+		int m = nums1.length;
+		int n = nums2.length;
+		int[] fin = new int[m + n];
+		int L[] = nums1;
+		int R[] = nums2;
+
+		int i = 0;
+		int j = 0;
+		int k = 0;
+
+		while (i < m && j < n) {
+			if (L[i] <= R[j]) {
+				fin[k] = L[i];
+				i++;
+			} else {
+				fin[k] = R[j];
+				j++;
+			}
+			k++;
+		}
+		while (i < m) {
+			fin[k] = L[i];
+			i++;
+			k++;
+		}
+
+		while (j < n) {
+			fin[k] = R[j];
+			j++;
+			k++;
+		}
+
+		System.out.println(Arrays.toString(fin));
+		double med;
+		int x = fin.length / 2;
+		if (fin.length % 2 == 0) {
+			med = (fin[x - 1] + fin[x]) / 2.0;
+		} else {
+			med = fin[x];
+		}
+		return med;
+	}
+}

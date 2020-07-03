@@ -1,0 +1,80 @@
+package arrays.maximumSubArraySum;
+
+public class MaximumSubArraySum {
+	public static void main(String[] args) {
+		MaximumSubArraySum obj = new MaximumSubArraySum();
+		int[] nums = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+		int maxSum = obj.maxSubArray_1(nums);
+		System.out.println("Maximum sum is " + maxSum);
+	}
+	/*
+	 * Approach 1 : Kandane Algorithm
+	 * Time Complexity: O(n) 
+	 * Space Complexity: O(1)
+	 */
+
+	public int maxSubArray_1(int[] arr) {
+
+		int size = arr.length;
+		int start = 0;
+		int end = 0;
+
+		int maxSoFar = 0, maxEndingHere = 0;
+
+		for (int i = 0; i < size; i++) {
+			if (arr[i] > maxEndingHere + arr[i]) {
+				start = i;
+				maxEndingHere = arr[i];
+			} else
+				maxEndingHere = maxEndingHere + arr[i];
+
+			if (maxSoFar < maxEndingHere) {
+				maxSoFar = maxEndingHere;
+				end = i;
+			}
+		}
+		System.out.println("Start=" + start + " end = " + end);
+		return maxSoFar;
+	}
+	//I submitted this code while doing revision
+	public int maxSubArray(int[] nums) {
+        int maxSumTillPrev = 0;
+        int maxSum = Integer.MIN_VALUE;
+        for(int n : nums){
+            if(maxSumTillPrev + n > n){
+                maxSumTillPrev = maxSumTillPrev + n;
+            }else{
+                maxSumTillPrev = n;
+            }
+            if(maxSum < maxSumTillPrev){
+                maxSum = maxSumTillPrev;
+            }
+        }
+        return maxSum;
+    }
+	
+	/*
+	 * Approach 2 : Brute-Force
+	 * 
+	 * Time Complexity: O(n2) Space Complexity: O(1)
+	 */
+	public int maxSubArray_2(int[] nums) {
+
+		int maxSum = Integer.MIN_VALUE;
+		int start = 0;
+		int last = 0;
+		for (int i = 0; i < nums.length; i++) {
+			int tempSum = 0;
+			for (int j = i; j < nums.length; j++) {
+				tempSum += nums[j];
+				if (tempSum > maxSum) {
+					maxSum = tempSum;
+					start = i;
+					last = j;
+				}
+			}
+		}
+		System.out.println("Start=" + start + " end = " + last);
+		return maxSum;
+	}
+}

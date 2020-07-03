@@ -1,0 +1,17 @@
+ package dynamicProgramming.BinomialCoefficient;
+
+import java.util.Arrays;
+
+public class BinomialCoefficient {
+	public static void main(String[] args) {
+		BinomialCoefficient obj = new BinomialCoefficient();
+		int num = obj.findNthCatalanNumber_4(8);
+		System.out.println(num);
+	}
+	
+	/*Approach 1 : Without DP
+	 * Time Complexity: Exponential
+	 * Space Complexity: O(1)
+	*/
+	
+}

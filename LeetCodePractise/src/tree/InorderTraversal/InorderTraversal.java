@@ -1,0 +1,44 @@
+package tree.InorderTraversal;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+import tree.TreeNode;
+
+public class InorderTraversal {
+	
+	/*Approach 1 : Recursion
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	List<Integer> list = new ArrayList<>();
+	public List<Integer> inorderTraversal_Recursion( TreeNode root){
+		if(root != null){
+			inorderTraversal_Recursion(root.left);
+			list.add(root.val);
+			inorderTraversal_Recursion(root .right);
+		}
+		return list;
+	}
+	
+	/*Approach 1 : Iteration
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	public List<Integer> inorderTraversal_Iteration( TreeNode root){
+		List<Integer> l = new ArrayList<>();
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode curr = root;
+		while(curr != null || !stack.empty()){
+			while(curr != null){
+				stack.push(curr);
+				curr = curr.left;
+			}
+			curr = stack.pop();
+			l.add(curr.val);
+			curr = curr.right;
+		}
+		return l;
+	}
+}

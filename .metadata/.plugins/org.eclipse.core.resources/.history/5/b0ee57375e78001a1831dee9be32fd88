@@ -1,0 +1,42 @@
+package threeSum;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class ThreeSum_Solution {
+	public List<List<Integer>> threeSum(int[] nums) {
+		Arrays.sort(nums);
+        List<List<Integer>> finalList = new ArrayList<>();
+        Set<List<Integer>> finalSet = new HashSet<>();
+		for (int j = 0; j < nums.length-2; j++) {
+            if(j>0 && (nums[j] == nums[j-1])){ 
+                continue;
+            }
+            int x = j+1;
+            int y = nums.length-1;
+            while(x<y){
+                int sum = nums[j] + nums[x] + nums[y];
+                if(sum == 0){
+                    List<Integer> list = Arrays.asList(nums[j],nums[x],nums[y]);
+                    if(!finalSet.contains(list)){                                                    
+                        finalSet.add(list);
+                        finalList.add(list);
+                    }
+                     x++;
+                    y--;
+                   
+                }else if(sum > 0){
+                    y--;
+                }else {
+                    x++;
+                }
+            }
+		}
+		return finalList;
+    }
+}

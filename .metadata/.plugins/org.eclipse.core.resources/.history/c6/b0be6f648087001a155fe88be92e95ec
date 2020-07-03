@@ -1,0 +1,30 @@
+package general;
+
+import java.util.Arrays;
+
+class Test {
+	public static void main(String args[]) 
+    { 
+		Test obj = new Test();
+        String pat = "ABCDE"; 
+        obj.printPerm(pat);
+        System.out.println(obj.counter);
+    }	
+
+	private void printPerm(String pat) {
+		printPermRec("", pat);
+	}
+	int counter = 0;
+	private void printPermRec(String perm, String word) {
+		if(word.isEmpty()){
+			System.out.println(perm);
+			counter++;
+		}else{
+			for (int i = 0; i < word.length(); i++) {
+				printPermRec(perm+word.charAt(i), word.substring(0, i) + word.substring(i+1, word.length()));
+			}
+		}
+	}
+
+	
+}

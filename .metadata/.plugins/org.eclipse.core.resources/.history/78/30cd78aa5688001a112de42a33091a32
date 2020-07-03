@@ -1,0 +1,19 @@
+package queue.LinearQueueUsingLinkedList;
+
+public class LinearQueueUsingLinkedList<E> {
+	ListNode<E> head;
+	ListNode<E> tail;
+	
+	public void enqueue(E item){
+		ListNode<E> temp = new ListNode<>(item);
+	}
+}
+
+class ListNode<E> {
+    public E val;
+    public ListNode<E> next;
+    public ListNode(E x) {
+  	  val = x; 
+  	  next = null;
+    }    
+}

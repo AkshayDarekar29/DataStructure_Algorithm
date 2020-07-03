@@ -1,0 +1,18 @@
+package string.Anagram;
+
+import java.util.HashMap;
+
+public class Anagram {
+	public static void main(String[] args) {
+		Anagram obj = new Anagram();
+		boolean isAnagram = obj.isAnagram("ABCA", "Baac");
+		System.out.println(isAnagram);
+	}
+
+	private boolean isAnagram(String s1, String s2) {
+		HashMap<Character, Integer> map1 = new HashMap<>();
+	}
+
+
+}
+

@@ -1,0 +1,19 @@
+package stack.InfixEvaluation;
+
+import java.util.Stack;
+
+public class InfixEvaluation {
+	public static void main(String[] args) {
+		InfixEvaluation obj = new InfixEvaluation();
+		String exp = "100*2+4-4/8+20-4";
+		double result = obj.evaluateInfix(exp);
+	}
+
+	private double evaluateInfix(String exp) {
+		
+		char[] tokens = exp.toCharArray();
+		Stack<Double> values =  new Stack<>();
+		
+		return 0;
+	}
+}

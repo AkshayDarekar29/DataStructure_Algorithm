@@ -1,0 +1,44 @@
+package general;
+
+import java.util.Stack;
+
+class MyQueue {
+	
+    Stack<Integer> s1 = new Stack<>();
+    Stack<Integer> s2 = new Stack<>();
+    Integer first = null;
+    public MyQueue() {}
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        if(first == null){
+            first = x;
+        }
+        s1.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        while(s1.size()>1){
+            first = s1.pop();
+            s2.push(first);
+        }
+        int x = s1.pop();
+        Stack<Integer> temp = s2;
+        s2 = s1;
+        s1 = temp;
+        
+        return x;
+        
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        return first;   
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return s1.size() == 0;
+    }
+}

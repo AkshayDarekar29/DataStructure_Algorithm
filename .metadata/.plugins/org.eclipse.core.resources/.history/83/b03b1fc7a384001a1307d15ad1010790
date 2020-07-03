@@ -1,0 +1,107 @@
+package string.Anagram;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+public class Anagram {
+	public static void main(String[] args) {
+		Anagram obj = new Anagram();
+		boolean isAnagram = obj.isAnagram_3("ABCA", "ABCA");
+		System.out.println(isAnagram);
+	}
+
+	private boolean isAnagram_1(String s1, String s2) {
+		s1 = s1.trim();
+		s2 = s2.trim();
+		if(s1.length() != s2.length()){
+			return false;
+		}
+		s1 = s1.toLowerCase();
+		s2 = s2.toLowerCase();
+		HashMap<Character, Integer> map1 = new HashMap<>();
+		HashMap<Character, Integer> map2 = new HashMap<>();
+		
+		for (int i = 0; i < s1.length(); i++) {
+			if(map1.containsKey(s1.charAt(i))){
+				map1.put(s1.charAt(i), map1.get(s1.charAt(i)+1));
+			}else{
+				map1.put(s1.charAt(i), 0);
+			}
+		}
+		
+		for (int i = 0; i < s2.length(); i++) {
+			if(map2.containsKey(s2.charAt(i))){
+				map2.put(s2.charAt(i), map2.get(s2.charAt(i)+1));
+			}else{
+				map2.put(s2.charAt(i), 0);
+			}
+		}
+		
+		for (Entry<Character, Integer> entry : map1.entrySet()) {
+			char ch = entry.getKey();
+			if(entry.getValue() != map2.get(ch)){
+				return false;
+			}
+		}
+		
+		return true;
+
+	}
+	
+	private boolean isAnagram_2(String s1, String s2) {
+		s1 = s1.trim();
+		s2 = s2.trim();
+		if(s1.length() != s2.length()){
+			return false;
+		}
+		s1 = s1.toLowerCase();
+		s2 = s2.toLowerCase();
+		
+		char[] charArr1 = s1.toCharArray();
+		Arrays.sort(charArr1);
+		
+		char[] charArr2 = s2.toCharArray();
+		Arrays.sort(charArr2);
+		
+		for (int i = 0; i < charArr1.length; i++) {
+			if(charArr1[i] != charArr2[i]){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean isAnagram_3(String s1, String s2){
+		s1 = s1.trim();
+		s2 = s2.trim();
+		if(s1.length() != s2.length()){
+			return false;
+		}
+		s1 = s1.toLowerCase();
+		s2 = s2.toLowerCase();
+		
+		int [] arr1 = new int[26];
+		int [] arr2 = new int[26];
+		
+		for (int i = 0; i < s1.length(); i++) {
+			char charVal = s1.charAt(i);
+			int charPos = s1.charAt(i) - 97;
+			arr1[charPos] = arr1[charPos] + 1;
+		}
+		for (int i = 0; i < s2.length(); i++) {
+			char charVal = s2.charAt(i);
+			int charPos = s2.charAt(i) - 97;
+			arr2[charPos] = arr2[charPos] + 1;
+		}
+		for (int i = 0; i < 26; i++) {
+			if(arr1[i] != arr2[i]){
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+}
+

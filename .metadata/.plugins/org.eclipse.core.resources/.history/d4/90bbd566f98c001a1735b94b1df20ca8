@@ -1,0 +1,82 @@
+package backtracking.RatInMaze;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class RatInMaze {
+	
+	public static void main(String args[]) 
+    { 
+		RatInMaze obj = new RatInMaze();
+		int [][] matrix = { { 1, 0, 0, 0, 0 }, 
+			                { 1, 1, 1, 1, 1 }, 
+			                { 1, 1, 1, 0, 1 }, 
+			                { 0, 0, 0, 0, 1 }, 
+			                { 0, 0, 0, 0, 1 } };
+		String s = obj.solve(matrix);
+		
+		System.out.println(s);
+		
+    }
+
+	/*
+	 * Approach 1 : Backtracking
+	 * Time Complexity: O(8^(m*n)) 
+	 * Space Complexity: O(m*n)
+	 */
+	private String solve(int[][] matrix){
+		int[] xMove = {0,-1,0,1};		
+		int[] yMove = {-1,0,1,0};
+		int x = 0;
+		int y = 0;
+		List<String> list = solveMaze(matrix,x,y,0,0,xMove,yMove, new ArrayList<String>());
+		StringBuilder sb = new StringBuilder();
+		list.forEach(s -> sb.append(s));
+		return sb.toString();
+		
+	}
+	
+	private List<String> solveMaze(int[][] matrix, int oldX, int oldY, int x, int y,int[] xMove, int[] yMove, ArrayList<String> list) {
+		if(x >= matrix.length-1 && y >= matrix[0].length-1){
+			return list;
+		}else{
+			for (int i = 0; i < 4; i++) {
+				int newX =  x + xMove[i];
+				int newY =  y + yMove[i];
+				
+				if(isSafe(matrix,x, y, newX, newY, list)){
+					x = newX;
+					y = newY;
+					switch(i){
+						case 0 :
+							list.add("L");
+							break;
+						case 1 :
+							list.add("U");
+							break;
+						case 2 :
+							list.add("R");
+							break;
+						case 3 :
+							list.add("D");
+							break;
+					}
+					solveMaze(matrix, x, y, newX, newY, xMove, yMove, list);
+					list.remove(list.size()-1);
+				}
+			}
+		}
+		return list;
+	}
+
+	private boolean isSafe(int[][] matrix, int x, int y, int newX, int newY, ArrayList<String> s) {
+		if(x == newX && y == newY){
+			return false;
+		}else if( newX >=0 && newX < matrix.length && newY >=0 && newY < matrix[0].length && matrix[newX][newY] == 1){
+			return true;
+		}
+		return false;
+	}
+
+}

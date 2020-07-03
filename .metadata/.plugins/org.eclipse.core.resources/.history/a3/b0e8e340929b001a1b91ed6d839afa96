@@ -1,0 +1,42 @@
+package general;
+
+import java.util.HashSet;
+import java.util.Set;
+
+class Test {
+	public static void main(String args[]) 
+    { 
+		Test obj = new Test();
+		int x = obj.longestCommonSubsequence("dknkdizqxkdczafixidorgfcnkrirmhmzqbcfuvojsxwraxe",
+"dulixqfgvipenkfubgtyxujixspoxmhgvahqdmzmlyhajerqz");
+		System.out.println(x);
+    }	
+	
+	Set<String> list;
+    public int longestCommonSubsequence(String text1, String text2) {
+        list = new HashSet<>();
+        longestCommonSubsequence2(text1, text2, 0, 0, new String());
+        int max = 0;
+        for(String s : list){
+            System.out.print(s + " | ");
+            if(max < s.length()){
+                max = s.length();
+            }
+        }
+        return max;
+    }
+    public void longestCommonSubsequence2(String t1, String t2, int t1Start, int t2Start, String s) {
+        for(int i = t1Start; i < t1.length(); i++){
+            char c1 = t1.charAt(i);
+            for(int j = t2Start; j < t2.length(); j++){
+                if(c1 == t2.charAt(j)){
+                	String s1 = s + Character.toString(c1);
+                	list.add(s);
+                    longestCommonSubsequence2(t1, t2, i+1, j+1, s1);
+                }
+            }
+        }
+    }
+	
+}
+

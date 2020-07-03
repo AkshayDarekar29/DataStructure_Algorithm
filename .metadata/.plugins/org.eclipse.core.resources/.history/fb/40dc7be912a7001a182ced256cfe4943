@@ -1,0 +1,114 @@
+package graph.NumberOfIslands;
+
+public class NumberOfIslands {
+	
+	/* Approach 1 : 
+	 * Time Complexity : O(m*n), where E is number of edges
+	 * Space Complexity : O(m*n)
+	 */
+	int m;
+    int n;
+    public int numIslands(char[][] grid) {
+        m = grid.length;
+        if(m == 0){
+            return 0;
+        }
+        n = grid[0].length;
+        int count = 0;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(grid[i][j] == '1'){
+                    marking(grid, i, j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public void marking(char[][] grid, int i, int j){
+        if(i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1'){
+            return;
+        }
+        grid[i][j] = '0';
+        marking(grid, i, j-1);
+        marking(grid, i-1, j);
+        marking(grid, i, j+1);
+        marking(grid, i+1, j);
+    }
+    
+    int m;
+    int n;
+    int[][] res;
+    public int numIslands(char[][] grid) {
+        m = grid.length;
+        if(m == 0){
+            return 0;
+        }
+        n = grid[0].length;
+        res = new int[m][n];
+        for(int i=0; i < m; i++){
+            for(int j=0; j < n; j++){
+                if(grid[i][j] == '1'){
+                    res[i][j] = -1;
+                }
+            }
+        }
+        int[][] move = {{0,1},{1,0}};
+        
+        for(int i=0; i < m; i++){
+            for(int j=0; j < n; j++){
+                if(grid[i][j] == '1'){
+                    for(int k=0; k < 2; k++){
+                        int nextX = i + move[k][0];
+                        int nextY = j + move[k][1];
+                        if(isSafe(nextX, nextY, grid)){
+                            union(i, j, nextX, nextY);
+                        }
+                    }
+                }
+            } 
+        }
+        for(int[] a : res){
+            System.out.println(Arrays.toString(a));
+        }
+        int count = 0;
+        for(int i=0; i < m; i++){
+            for(int j=0; j < n; j++){
+                if(res[i][j] < 0){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    
+    public boolean isSafe(int x, int y, char[][] grid){
+        if(x >=0 && x < m && y >=0 && y < n && grid[x][y] == '1'){
+            return true;
+        }
+        return false;
+    }
+    
+    public void union(int i, int j, int nextX, int nextY){
+        int pos_1 = i * n + j;
+        int pos_2 = nextX * n + nextY;
+        int first = find(pos_1);
+        int second = find(pos_2);
+        if(first == second){
+            return;
+        }
+        i = first/n;
+        j = first%n;
+        nextX = second/n;
+        nextY = second%n;
+        res[i][j] += res[nextX][nextY];
+        res[nextX][nextY] = i * n + j;
+    }
+    
+    public int find(int pos){
+        if(res[pos/n][pos%n] < 0){
+            return pos;
+        }
+        return find(res[pos/n][pos%n]);
+    }
+}

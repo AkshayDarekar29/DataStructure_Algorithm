@@ -1,0 +1,10 @@
+package patternSearch;
+
+public class RabinKarp {
+	public static void main(String args[]) 
+    { 
+        String txt = "ABABDABACDABABCABAB"; 
+        String pat = "ABABCABAB"; 
+        new KMP_Algorithm().KMPSearch(pat, txt); 
+    } 
+}

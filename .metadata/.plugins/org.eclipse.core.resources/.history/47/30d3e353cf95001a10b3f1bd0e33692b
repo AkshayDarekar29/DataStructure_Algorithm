@@ -1,0 +1,36 @@
+package greedy.JumpGame_2;
+
+
+public class JumpGame {
+	
+	/* Approach 1: 
+	 * Time Complexity : O(n)
+	 * Space Complexity : O(1)
+	 */
+	public boolean canJump(int[] nums) {
+        int n = nums.length;
+        int last = n-1;
+        for(int i = n-2; i>=0; i--){
+            if(i + nums[i] >= last){
+                last=i;
+            }
+        }
+        return last==0;
+    }
+	
+	/* Approach 2: 
+	 * Time Complexity : O(n)
+	 * Space Complexity : O(1)
+	 */
+	public boolean canJump_2(int[] nums) {
+        int reachable = 0;
+        for (int i=0; i < nums.length; i++) {
+            if (i > reachable) return false;
+            reachable = Math.max(reachable, i + nums[i]);
+            if(reachable >= nums.length-1){
+                break;
+            }
+        }
+        return true;
+    }
+}

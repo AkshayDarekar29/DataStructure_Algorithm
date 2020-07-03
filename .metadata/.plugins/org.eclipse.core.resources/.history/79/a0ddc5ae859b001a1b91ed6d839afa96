@@ -1,0 +1,47 @@
+package general;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+class Test {
+	public static void main(String args[]) 
+    { 
+		Test obj = new Test();
+		int x = obj.longestCommonSubsequence("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq");
+		System.out.println(x);
+    }	
+	
+	List<String> list;
+    public int longestCommonSubsequence(String text1, String text2) {
+        list = new ArrayList<>();
+        longestCommonSubsequence2(text1, text2, 0, 0, new StringBuilder());
+        int max = 0;
+        for(String s : list){
+            System.out.print(s + " | ");
+            if(max < s.length()){
+                max = s.length();
+            }
+        }
+        return max;
+    }
+    public void longestCommonSubsequence2(String t1, String t2, int t1Start, int t2Start, StringBuilder sb) {
+        for(int i = t1Start; i < t1.length(); i++){
+            char c1 = t1.charAt(i);
+            for(int j = t2Start; j < t2.length(); j++){
+                if(c1 == t2.charAt(j)){
+                    sb.append(Character.toString(c1));
+                    longestCommonSubsequence2(t1, t2, i+1, j+1, sb);
+                }
+            }
+        }
+        //if(t1Start > t1.length()-1){
+            if(sb.length() > 0){
+                list.add(sb.toString());
+                sb = sb.delete(0, sb.length()+1);;
+            }
+        //}
+    }
+	
+}
+

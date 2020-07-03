@@ -1,0 +1,44 @@
+package backtracking.RatInMaze;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class RatInMaze {
+	
+	public static void main(String args[]) 
+    { 
+		RatInMaze obj = new RatInMaze();
+		int [][] matrix = { { 1, 0, 0, 0, 0 }, 
+			                { 1, 1, 1, 1, 1 }, 
+			                { 1, 1, 1, 0, 1 }, 
+			                { 0, 0, 0, 0, 1 }, 
+			                { 0, 0, 0, 0, 1 } };
+		String s = obj.solve(matrix);
+		
+		System.out.println(s);
+		
+    }
+
+	/*
+	 * Approach 1 : Backtracking
+	 * Time Complexity: O(8^(m*n)) 
+	 * Space Complexity: O(m*n)
+	 */
+	private String solve(int[][] matrix){
+		int[] xMove = {0,-1,0,1};		
+		int[] yMove = {-1,0,1,0};
+		int x = 0;
+		int y = 0;
+		List<String> s = solveMaze(matrix,x,y,xMove,yMove, new ArrayList<String>());
+		
+	}
+	private StringBuilder KniteTour(int[][] matrix, int x, int y, int move, int[] xMove, int[] yMove) {
+	
+	}
+
+	private boolean isSafe(int nextX, int nextY, int[][] matrix) {
+		
+		return false;
+	}	
+}

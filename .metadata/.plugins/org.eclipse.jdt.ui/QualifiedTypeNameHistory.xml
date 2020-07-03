@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="mergeIntervals.MergeIntervals"/>
+<fullyQualifiedTypeName name="majorityElement_2.MajorityElement_2"/>
+<fullyQualifiedTypeName name="sortColors.SortColors"/>
+<fullyQualifiedTypeName name="linkedList.middleOfLinkedList.MiddleOfLinkedList.ListNode"/>
+<fullyQualifiedTypeName name="linkedList.middleOfLinkedList.MiddleOfLinkedList"/>
+<fullyQualifiedTypeName name="linkedList.ListCycle.ListCycle"/>
+<fullyQualifiedTypeName name="linkedList.addTwoNumbers_2.AddTwoNumbers_2"/>
+<fullyQualifiedTypeName name="linkedList.ListNode"/>
+<fullyQualifiedTypeName name="stack.LargestRectangleInHistogram.LargestRectangleInHistogram"/>
+<fullyQualifiedTypeName name="java.util.Stack"/>
+<fullyQualifiedTypeName name="java.lang.Character"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="backtracking.PalindromePartition.PalindromePartition"/>
+<fullyQualifiedTypeName name="java.util.Queue"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
+<fullyQualifiedTypeName name="greedy.JumpGame_2.JumpGame_2"/>
+<fullyQualifiedTypeName name="java.util.PriorityQueue"/>
+<fullyQualifiedTypeName name="dynamicProgramming.CoinChange.CoinChange"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="dynamicProgramming.UniqueBST_2.UniqueBST_2"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+</qualifiedTypeNameHistroy>

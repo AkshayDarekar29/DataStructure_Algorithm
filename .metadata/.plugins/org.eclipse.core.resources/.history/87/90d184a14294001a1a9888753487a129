@@ -1,0 +1,13 @@
+package heap.MergeKSortedArray;
+
+
+public class MergeKSortedArray {
+	
+	
+	/* Approach : MinHeap
+	 * Time Complexity : nLog(n)
+	 * Space Complexity : O(k)
+	 */
+	
+	
+}

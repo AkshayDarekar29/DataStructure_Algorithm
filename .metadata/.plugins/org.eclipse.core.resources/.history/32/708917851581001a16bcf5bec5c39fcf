@@ -1,0 +1,57 @@
+package linkedList.reverseLinkedList;
+
+import linkedList.ListNode;
+
+public class ReverseLinkedList {
+		 
+	public static void main(String[] args) {
+		ListNode head = ListNode.getSinglyLinkedList();
+		
+		ReverseLinkedList obj = new ReverseLinkedList();
+		ListNode node = obj.reverseList(head);
+		System.out.println(node);
+	}
+	
+	/*
+	 * Approach 1 : Two Pointers
+	 * Time Complexity: O(n) 
+	 * Space Complexity: O(1)
+	 */
+	public ListNode reverseList(ListNode head) {
+        ListNode curr = head;
+        ListNode N = null;
+        ListNode P = null;
+        
+        while(curr.next != null){
+        	N = curr.next;
+        	curr.next = P;
+        	P = curr;
+        	curr = N;
+        }
+        
+        return curr;
+    }
+	
+	/*
+	 * Approach 2 : Using array to store each node
+	 * Time Complexity: O(n) 
+	 * Space Complexity: O(n)
+	 */
+	public ListNode middleNode_2(ListNode head) {
+       ListNode[] A = new ListNode[100];
+       int t = 0;
+       while (head.next != null) {
+           A[t++] = head;
+           head = head.next;
+           if(head.next == null){
+                A[t++] = head;
+           }
+       }
+       if(t == 0){
+           return head;
+       }
+     
+       return A[t/2];
+   }
+	
+}

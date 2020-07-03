@@ -1,0 +1,10 @@
+ package dynamicProgramming.NthCatalanNumber;
+
+public class NthCatalanNumber {
+	
+	/*Approach 1 : Bottom-Up
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	*/
+	
+}

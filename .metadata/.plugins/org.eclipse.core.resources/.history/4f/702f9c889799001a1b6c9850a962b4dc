@@ -1,0 +1,19 @@
+ package dynamicProgramming.Knapsack_0_1;
+
+import java.util.Arrays;
+
+public class Knapsack_0_1 {
+	public static void main(String[] args) {
+		Knapsack_0_1 obj = new Knapsack_0_1();
+		/*int num = obj.BinomialCoe(8,2);
+		System.out.println(num);*/
+		int n = obj.BinomialCoe_3(8, 8);
+		System.out.println(n);
+		
+	}
+	
+	/*Approach 1 : Without DP
+	 * Time Complexity: Exponential
+	 * Space Complexity: O(1)
+	*/
+	}

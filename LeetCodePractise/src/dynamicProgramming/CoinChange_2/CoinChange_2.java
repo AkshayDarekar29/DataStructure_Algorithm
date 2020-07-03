@@ -1,0 +1,77 @@
+ package dynamicProgramming.CoinChange_2;
+
+import java.util.Arrays;
+
+public class CoinChange_2 {
+	
+	/*Approach 1 : Bottom-Up
+	 * Time Complexity: O(n*k)
+	 * Space Complexity: O(n*k), where n is amount, and k is size of array of coins
+	*/
+	public int change(int amount, int[] coins) {
+        if(amount == 0 ){
+            return 1;
+        }else if(coins.length == 0){
+            return 0;
+        }
+        int[][] dp = new int[coins.length][amount+1];
+        //base 
+        for(int i = 0; i <= amount; i++){
+            if(i%coins[0] == 0){
+                dp[0][i] = 1;
+            }
+        }
+        for(int i = 1; i < coins.length; i++){
+            for(int j = 0; j <= amount; j++){
+                if(j-coins[i] >= 0){
+                    dp[i][j] = dp[i-1][j] + dp[i][j-coins[i]];
+                }else{
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+        return dp[coins.length-1][amount];
+    }
+
+    /*Approach 2 : Top-Down
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	*/
+	int [][] dp;
+    public int change_top_down(int amount, int[] coins) {
+        if(amount == 0 ){
+            return 1;
+        }else if(coins.length == 0){
+            return 0;
+        }
+        dp = new int [coins.length][amount+1];
+        for(int [] n : dp){
+            Arrays.fill(n , -1);
+        }
+        change2(amount, coins, coins.length-1);
+        for(int [] n : dp){
+            System.out.println(Arrays.toString(n));
+        }
+        return dp[coins.length-1][amount];
+    }
+    public int change2(int amount, int[] coins, int i) {
+        if(dp[i][amount] == -1){
+            if(i == 0){
+                if(amount%coins[0] == 0){
+                    dp[0][amount] = 1;
+                }else{
+                    dp[0][amount] = 0;
+                }
+            }else{
+                for(int j = i; j > 0; j--){
+                    if(amount - coins[j] >= 0){
+                        dp[j][amount] = change2(amount, coins, j-1) + change2(amount - coins[j], coins, j);
+                    }else{
+                        dp[j][amount] = change2(amount, coins, j-1);
+                    }
+                }
+            }
+        }
+        return dp[i][amount];
+    }
+}

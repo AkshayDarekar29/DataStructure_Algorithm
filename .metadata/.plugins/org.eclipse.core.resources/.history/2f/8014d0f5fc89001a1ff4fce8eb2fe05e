@@ -1,0 +1,16 @@
+package binarySearch.PowerOfNumber;
+
+public class PowerOfNumber {
+	public static void main(String[] args) {
+		PowerOfNumber obj = new PowerOfNumber();
+		int x = obj.mySqrt(100);
+		System.out.println(x);
+	}
+	/*
+	 * Approach 1 : Iteration
+	 * Time Complexity: O(log(n)) 
+	 * Space Complexity: O(1)
+	 */
+	
+	
+}

@@ -1,0 +1,13 @@
+package string.Anagram;
+
+
+public class Anagram {
+	public static void main(String[] args) {
+		Anagram obj = new Anagram();
+		boolean isAnagram = obj.isAnagram("ABCA", "Baac");
+		System.out.println(isAnagram);
+	}
+
+
+}
+

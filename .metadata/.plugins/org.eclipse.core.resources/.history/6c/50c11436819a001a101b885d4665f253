@@ -1,0 +1,41 @@
+package dynamicProgramming.CuttingARod;
+
+public class CuttingARod {
+	public static void main(String[] args) {
+		CuttingARod obj = new CuttingARod();
+		int len = 8;
+		int[] price = {1,5,8,9,30,17,39,20};
+		int n = obj.cutRod(price, len);
+		System.out.println(n);
+	}
+
+	/*Approach 1 : Brute-Force
+	 * Time Complexity: 
+	 * Space Complexity: O(len)
+	*/
+	public int cutRod(int price[], int n){ 
+        if (n <= 0){
+            return 0;
+        }
+        int max_val = Integer.MIN_VALUE; 
+        for (int i = 0; i<n; i++){
+            max_val = Math.max(max_val, price[i] + cutRod(price, n-i-1)); 
+        }
+        return max_val; 
+    }
+	
+	/*Approach 1 : Brute-Force
+	 * Time Complexity: 
+	 * Space Complexity: O(len)
+	*/
+	public int cutRod(int price[], int n){ 
+        if (n <= 0){
+            return 0;
+        }
+        int max_val = Integer.MIN_VALUE; 
+        for (int i = 0; i<n; i++){
+            max_val = Math.max(max_val, price[i] + cutRod(price, n-i-1)); 
+        }
+        return max_val; 
+    } 
+}

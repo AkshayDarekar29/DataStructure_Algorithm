@@ -1,0 +1,12 @@
+ package dynamicProgramming.EditDistance;
+
+import java.util.Arrays;
+
+public class EditDistance {
+
+	/*Approach 1 : Brute-Force
+	 * Time Complexity: coins.length^amount
+	 * Space Complexity: 
+	 */
+	
+}

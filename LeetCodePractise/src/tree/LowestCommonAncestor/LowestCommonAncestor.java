@@ -1,0 +1,111 @@
+package tree.LowestCommonAncestor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+import tree.TreeNode;
+
+public class LowestCommonAncestor {
+	
+	/*Approach 1 : DFS - two goes
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> list1 = new ArrayList<>();
+        List<TreeNode> list2 = new ArrayList<>();
+        dfs(root, p, list1);
+        dfs(root, q, list2);
+        int len = Math.min(list1.size(), list2.size());
+        TreeNode lca = null;
+        for(int i = 0; i < len; i++){
+            if(list1.get(i) == list2.get(i)){
+                lca = list1.get(i);
+            }else{
+                break;
+            }
+        }
+        return lca;
+    }
+    
+    public boolean dfs(TreeNode root, TreeNode p, List<TreeNode> list){
+        if(root == null){
+            return false;
+        }
+        else if(root == p){
+            list.add(root);
+            return true;
+        }else{
+            list.add(root);
+            if(root.left != null){
+                if(dfs(root.left, p, list)){
+                    return true;
+                }else{
+                    list.remove(list.size()-1);
+                }
+            }
+            if(root.right != null){
+                if(dfs(root.right, p, list)){
+                    return true;
+                }else{
+                    list.remove(list.size()-1);
+                }
+            }
+            
+        }
+        return false;
+    }
+    
+    /*Approach 1 : DFS - one go
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n) , where is n is number of nodes
+	*/
+    List<TreeNode> list1 = new ArrayList<>();
+    List<TreeNode> list2 = new ArrayList<>();
+   boolean foundP = false;
+   boolean foundQ = false;
+   public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+       dfs2(root, p, q);
+       int len = Math.min(list1.size(), list2.size());
+       TreeNode lca = null;
+       for(int i = 0; i < len; i++){
+           if(list1.get(i) == list2.get(i)){
+               lca = list1.get(i);
+           }else{
+               break;
+           }
+       }
+       return lca;
+   }
+   
+   public boolean dfs2(TreeNode root, TreeNode p, TreeNode q){
+       if(foundP || foundQ ){
+           if(list2.size() == 0){
+               list1.forEach(i -> list2.add(i));
+           }
+       }
+       if(root == p){
+           foundP = true;
+       }
+       if(root == q){
+           foundQ = true;
+       }
+       if(root == null){
+           return false;
+       }else if(foundP && foundQ){
+           list1.add(root);
+          return true; 
+       }else{
+           list1.add(root);
+           if(dfs2(root.left, p, q)){
+               return true;
+           }
+           if(dfs2(root.right, p, q)){
+               return true;
+           }
+           list1.remove(list1.size()-1);
+       }
+       return false;
+   }
+}

@@ -1,0 +1,28 @@
+package string.Anagram;
+
+import java.util.HashMap;
+
+public class Anagram {
+	public static void main(String[] args) {
+		Anagram obj = new Anagram();
+		boolean isAnagram = obj.isAnagram("ABCA", "Baac");
+		System.out.println(isAnagram);
+	}
+
+	private boolean isAnagram(String s1, String s2) {
+		HashMap<Character, Integer> map1 = new HashMap<>();
+		HashMap<Character, Integer> map2 = new HashMap<>();
+		
+		for (int i = 0; i < s1.length(); i++) {
+			if(map1.containsKey(s1.charAt(i))){
+				map1.put(s1.charAt(i), map1.get(s1.charAt(i)+1));
+			}else{
+				map1.put(s1.charAt(i), 0);
+			}
+		}
+
+	}
+
+
+}
+

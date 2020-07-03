@@ -1,0 +1,29 @@
+package binarySearch.FindPeakElement;
+
+public class SquareRoot {
+	public static void main(String[] args) {
+		FindPeakElement obj = new FindPeakElement();
+		int x = obj.mySqrt(100);
+		System.out.println(x);
+	}
+	/*
+	 * Approach 1 : Iteration
+	 * Time Complexity: O(log(n)) 
+	 * Space Complexity: O(1)
+	 */
+	public int mySqrt(int x) {
+        int left = 1, right = x;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (mid == x / mid) {
+                return mid;
+            } else if (mid < x / mid) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right;
+    }
+	
+}

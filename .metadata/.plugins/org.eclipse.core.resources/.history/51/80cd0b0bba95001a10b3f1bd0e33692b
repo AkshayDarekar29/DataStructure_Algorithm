@@ -1,0 +1,42 @@
+package greedy.JumpGame;
+
+
+public class JumpGame {
+	
+	/* Approach 1: 
+	 * Time Complexity : O(n)
+	 * Space Complexity : O(1)
+	 */
+	public int canCompleteCircuit(int[] gas, int[] cost) {
+        int start =0, i=0,def=0, temp =0;
+        while(i < gas.length){
+            temp +=gas[i]-cost[i];
+            def+=gas[i]-cost[i];
+            if(temp<0){
+                start=i+1;
+                temp=0;
+            }
+            i++;
+        }
+        if(def >= 0)
+                return start;
+        else
+                return -1;
+    }
+	
+	/* Approach 2: 
+	 * Time Complexity : O(n2)
+	 * Space Complexity : O(1)
+	 */
+	public boolean canJump(int[] nums) {
+        int reachable = 0;
+        for (int i=0; i < nums.length; i++) {
+            if (i > reachable) return false;
+            reachable = Math.max(reachable, i + nums[i]);
+            if(reachable >= nums.length-1){
+                break;
+            }
+        }
+        return true;
+    }
+}

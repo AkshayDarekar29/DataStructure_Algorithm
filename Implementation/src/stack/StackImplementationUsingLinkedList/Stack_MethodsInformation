@@ -1,0 +1,4 @@
+* push - Pushes an item onto the top of stack and returns the inserted item.
+* pop - Removes an item at top of stack and returns same.
+* peek - returns the item at top of stack without removing it.
+* empty - check whether stack is empty or not. Return boolean value.

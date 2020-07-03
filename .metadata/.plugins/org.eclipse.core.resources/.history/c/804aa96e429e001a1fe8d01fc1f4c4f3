@@ -1,0 +1,22 @@
+package dynamicProgramming.BuildingBridges;
+
+import java.util.Arrays;
+
+public class BuildingBridges {
+	public static void main(String[] args) {
+		BuildingBridges obj = new BuildingBridges();
+		int[][] b = {{6, 2}, {4, 3}, {2, 6}, {1, 5}};
+		int n = obj.maxBridges(b);
+		System.out.println(n);
+	}
+
+	/*Approach 1 : Brute-Force
+	 * Time Complexity: 
+	 * Space Complexity: O(len)
+	*/
+	private int maxBridges(int[][] b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+ 
+}

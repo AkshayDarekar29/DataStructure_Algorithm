@@ -1,0 +1,73 @@
+package string.PrintPermutationOfString;
+
+
+public class PrintPermutationOfString {
+	
+	public static void main(String[] args) {
+		PrintPermutationOfString obj = new PrintPermutationOfString();
+		/*obj.printAllPermutations("ABCA");
+		System.out.println("Total "+ obj.counter);*/
+		String input = "ABCD";
+		obj.printAllPermutations_Backtracking(input, 0, input.length()-1);
+	}
+	
+	/*Approach 1 : Recursion - fixing element position
+	 * 
+	 * Time Complexity: O(n*n!)
+	 * - For any given string of length n there are n! possible permutations, 
+	 *   and we need to print all of them so Time complexity is O(n * n!).
+	 * Space Complexity: O(n!) - If we consider implicit space
+	*/
+	private void printAllPermutations(String input) {
+		print("",input);
+	}
+	int counter = 0;
+	private void print(String perm, String word) {
+		if(word.isEmpty()){
+			System.out.println(perm);
+			counter++;
+		}else{
+			for (int i = 0; i < word.length(); i++) {
+				print(perm+ word.charAt(i), 
+						word.substring(0, i)+word.substring(i+1, word.length()));
+			}
+		}
+	}
+	
+	/*Approach 1 : Backtracking
+	 * 
+	 * Time Complexity: O(n*n!)
+	 * - For any given string of length n there are n! possible permutations, 
+	 *   and we need to print all of them so Time complexity is O(n * n!).
+	 * Space Complexity: O(n!) - If we consider implicit space
+	*/
+	static int count = 0;
+	private void printAllPermutations_Backtracking(String input, int l, int r) {
+		if( l == r){
+			System.out.println("***** "+input);
+		}else{
+			for(int i=l; i <= r; i++){
+				input = swap(input, l, i);
+				//System.out.println("before ----------->  "+input + ", "+ (l+1) + ", "+ r);
+				count++;
+				printAllPermutations_Backtracking(input, l+1, r);
+				//System.out.println("after ----------->  "+input + ", "+ (l+1) + ", "+ r);		
+				count--;
+				input = swap(input, l, i);	
+			}
+		}
+	}
+
+	private String swap(String input, int l, int i) {
+		char[] c = input.toCharArray();
+		char temp = c[i];
+		c[i] = c[l];
+		c[l] = temp;
+		
+		return String.valueOf(c);
+	}
+	
+	
+	
+}
+

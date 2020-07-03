@@ -1,0 +1,60 @@
+1587869243534	Copy package
+1587869266508	Rename type 'StackImplementationUsingArray'
+1587876903511	Copy package
+1587876919783	Rename package 'stack.StackUsim'
+1587876936579	Rename type 'StackImplementationUsingLinkedList'
+1587877181686	Copy compilation unit
+1587881787236	Copy package
+1587881824303	Copy compilation unit
+1587881828100	Delete elements
+1587881859667	Rename type 'MyQueue'
+1587884631910	Copy compilation unit
+1587895416390	Copy compilation unit
+1587896209061	Copy package
+1587896214219	Delete element
+1587896217080	Delete element
+1587896223772	Rename type 'StackUsingQueue'
+1587900051554	Copy package
+1587900066238	Rename type 'NextGreaterElement'
+1587900071845	Rename resource 'NextGreaterElement_Description'
+1587900082559	Move file
+1587900098881	Copy file
+1587900107218	Rename resource 'NextGreaterElement_Description'
+1587900119369	Rename resource 'NextGreaterElement__2Description'
+1587906047664	Copy package
+1587906070510	Rename type 'NextGreaterElement_2'
+1587906079057	Rename resource 'NextGreaterElement_2_Description'
+1587956041767	Copy file
+1587956049199	Rename resource 'Stack_MethodsInformation'
+1587956062688	Copy file
+1587965854950	Copy package
+1587965874886	Rename type 'LinearQueueUsingArray'
+1587966057542	Rename type 'CircularQueueUsingArray'
+1587966093714	Rename type 'LinearQueueUsingArray'
+1587970709167	Copy packages
+1587970734600	Copy packages
+1587970756864	Delete elements
+1587970762802	Delete elements
+1587970826188	Copy package
+1587970832365	Delete element
+1587970834804	Delete element
+1587970847795	Rename type 'MinStack'
+1587978879283	Delete element
+1587978898328	Copy file
+1587978911249	Rename resource 'NextGreaterElement_Description'
+1588148433276	Rename package 'binarySearch'
+1588148458079	Copy package
+1588148468022	Rename type 'BinarySearchAlgorithm'
+1588152896444	Copy package
+1588152904217	Rename type 'SquareRoot'
+1588152913031	Rename resource 'SquareRoot_Description'
+1588219412950	Copy package
+1588219425721	Rename type 'SquareRoot'
+1588219448128	Rename resource 'SquareRoot_Description'
+1588233819337	Copy package
+1588233837342	Rename type 'PowerOfNumber'
+1588233844425	Rename resource 'PowerOfNumber_Description'
+1588247885502	Copy package
+1588247900671	Rename type 'SearchInRotatedSortedArray'
+1588247907148	Rename resource 'SearchInRotatedSortedArray_Description'
+1588257091866	Copy package

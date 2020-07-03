@@ -1,0 +1,124 @@
+package linkedList.addTwoNumbers_2;
+
+import java.util.Stack;
+
+import linkedList.ListNode;
+
+public class AddTwoNumbers_2 {
+	
+	public static void main(String[] args) {
+		ListNode l1 = ListNode.getSinglyLinkedList();
+		ListNode l2 = ListNode.getSinglyLinkedList();
+		ListNode x = new ListNode(25);
+		l2.next = x;
+		AddTwoNumbers_2 obj = new AddTwoNumbers_2();
+		obj.addTwoNumbers_2(l1,l2);
+	}
+	/*
+	 * Approach 1 : Recursion
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(m-n)
+	 */
+	public int carry = 0;
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2){
+       int l1_size = 0;
+       int l2_size = 0;
+       ListNode slow = l1;
+       while(slow != null){
+           slow = slow.next;
+           l1_size++;
+       }
+       slow = l2;
+       while(slow != null){
+           slow = slow.next;
+           l2_size++;
+       }
+       if(l1_size > l2_size){
+           int i = 0;
+           ListNode p = new ListNode(0);
+           ListNode z = p;
+           while( i < (l1_size - l2_size)){
+               ListNode x = new ListNode(0);
+               z.next = x;    
+               z = z.next;
+               i++;
+           }
+           z.next = l2;
+           l2 = p.next;
+       }else if(l1_size < l2_size){
+           int i = 0;
+           ListNode p = new ListNode(0);
+           ListNode z = p;
+           while( i < (l2_size - l1_size)){
+               ListNode x = new ListNode(0);
+              
+               z.next = x;    
+               z = z.next;
+               i++;
+           }
+           z.next = l1;
+           l1 = p.next;
+       }
+        ListNode head = addTwoNumbers2(l1, l2);
+        if(carry != 0){
+            ListNode newHead = new ListNode(carry);
+            newHead.next = head;
+            return newHead;
+        }else{
+            return head;
+        }
+    }
+   public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {       
+       if(l1 == null && l2 == null){
+           return null;
+       }
+       ListNode prev  = addTwoNumbers2(l1.next, l2.next);
+
+       int x = l1.val;
+       int y = l2.val;
+       int sum = x + y + carry;
+       carry = sum/10;
+       ListNode curr = new ListNode(sum%10);;
+       curr.next = prev;
+       
+       return curr;
+   }
+   
+    /*
+	 * Approach 2 : Iteration - Stack
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(m+n)
+	 */
+   public ListNode addTwoNumbers_2(ListNode l1, ListNode l2){
+	   Stack<ListNode> l1_stack = new Stack<>();
+	   Stack<ListNode> l2_stack = new Stack<>();
+	   int carry = 0;
+	   int sum = 0;
+	   ListNode head = null;
+	   while(l1 != null){
+		   l1_stack.push(l1);
+		   l1 = l1.next;
+	   }
+	   while(l2 != null){
+		   l2_stack.push(l2);
+		   l2 = l2.next;
+	   }
+	   ListNode temp = null;
+	   while(!l1_stack.empty() || !l2_stack.empty()){
+		   int x = l1_stack.empty() ? 0 : l1_stack.pop().val;
+		   int y = l2_stack.empty() ? 0 : l2_stack.pop().val;
+		   sum = x + y + carry;
+		   carry = sum/10;
+		   temp = new ListNode(sum%10);
+		   temp.next = head;
+		   head = temp;
+	   }
+	   if(carry != 0){
+		   temp = new ListNode(carry);
+		   temp.next = head;
+		   head = temp;
+	   }
+	   return head;
+   }
+    
+}

@@ -1,0 +1,42 @@
+package queue.LinearQueueUsingLinkedList;
+
+public class LinearQueueUsingLinkedList<E> {
+	
+	public boolean add(E item){
+		if(topOfQueue == array.length){
+			throw new IllegalStateException("Queue is full");
+		}else{
+			array[topOfQueue++] = item;
+		}
+		return true;
+	}
+	
+	
+	public E poll(){
+		E item;
+		if(beginningOfQueue >= topOfQueue){
+			beginningOfQueue = 0;
+			topOfQueue = 0;
+			item = null;
+		}else{
+			item = array[beginningOfQueue++];
+		}
+		
+		return item;
+	}
+	
+	public E peek(){
+		E item;
+		if(topOfQueue == 0){
+			item = null;
+		}else{
+			item = array[beginningOfQueue];
+		}
+		return item;
+	}
+	
+	public boolean isEmpty(){
+		return topOfQueue == 0;
+	}
+	
+}

@@ -1,0 +1,80 @@
+ package dynamicProgramming.NthCatalanNumber;
+
+import java.util.Arrays;
+
+public class NthCatalanNumber {
+	public static void main(String[] args) {
+		NthCatalanNumber obj = new NthCatalanNumber();
+		int num = obj.findNthCatalanNumber_3(10);
+		System.out.println(num);
+	}
+	/*Approach 1 : Without DP
+	 * Time Complexity: Exponential
+	 * Space Complexity: O(1)
+	*/
+	public int findNthCatalanNumber(int n){
+		int res = 0;
+		if(n <= 1){
+			return 1;
+		}
+		for(int i = 0; i<n; i++){
+			res = res + findNthCatalanNumber(i) * findNthCatalanNumber(n-i-1);
+		}
+		return res;
+	}
+	
+	/*Approach 2 : with DP - Top-Down
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(n)
+	*/
+	int C[] = new int[11];
+	public int findNthCatalanNumber_2(int n){
+		if(C[n] == 0){
+			if(n <= 1){
+				C[n] = 1;
+			}else{
+				int res = 0;
+				for(int i = 0; i<n; i++){
+					res = res + findNthCatalanNumber_2(i) * findNthCatalanNumber_2(n-i-1);
+				}
+				C[n] = res;
+			}
+		}
+		return C[n];
+	}
+	
+	/*Approach 3 : with DP - Bottom-Up
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(n)
+	*/
+	public int findNthCatalanNumber_3(int n){
+		int C[] = new int[n+1];
+		C[0] = 1;
+		C[1] = 1;
+		for (int i = 2; i <= n; i++) {
+			int res = 0;
+			for (int j = 0; j < i; j++) {
+				res += C[j]*C[i-j-1];
+			}
+			C[i] = res;
+		}
+		System.out.println(Arrays.toString(C));
+		return C[n];
+	}
+	
+	/*Approach 3 : Using Binomial Coefficient
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	 * Answer = C(2n, n)/(n+1)
+	 * C(2n, n) = (2n)!/((n!)(2n - n)!)
+	 * C(n, k) = C(n, n-k)  // we can change k to n-k if k > n-k 
+	*/
+	public int findNthCatalanNumber_4(int n){
+		int coe = findBinomialCoefficient(2*n, n);
+		return coe/(n+1);
+	}
+	private int findBinomialCoefficient(int i, int n) {
+		int res = 1;
+		return res;
+	}
+}

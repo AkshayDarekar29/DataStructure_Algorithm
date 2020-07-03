@@ -1,0 +1,52 @@
+package dynamicProgramming.CuttingARod;
+
+public class SubsetSum {
+	public static void main(String[] args) {
+		CuttingARod obj = new CuttingARod();
+		int[] arr = {3,5,8,2,1,15};
+		int target = 38;
+		int ans = obj.isSubsetSum_2(arr, target, 0);
+		System.out.println(ans == 0 ? false : true);
+	}
+	 
+	/*Approach 1 : Bottom-Up
+	 * Time Complexity: arr.length*target
+	 * Space Complexity: arr.length*target
+	*/
+	public int isSubsetSum_2(int[] arr, int target, int start) {
+		int [][] dp = new int[arr.length][target+1];
+		if(target >= arr[0]){
+			dp[0][arr[0]] = 1;
+		}
+		for(int i=1; i < arr.length; i++ ){
+			for(int j = 0; j <= target; j++){
+				if(j-arr[i] >= 0){
+					dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-arr[i]]);
+				}else{
+					dp[i][j] = dp[i-1][j];
+				}
+			}
+		}
+		//System.out.println(Arrays.deepToString(dp));
+		return dp[arr.length-1][target];
+	}
+	
+	/*Approach 1 : Brute-Force
+	 * Time Complexity: 
+	 * Space Complexity: O(arr.length)
+	*/
+	public boolean isSubsetSum(int[] arr, int target, int start) {
+		if(target < 0){
+			return false;
+		}else if(target == 0){
+			return true;
+		}else{
+			for(int i = start; i < arr.length; i++){
+				if(isSubsetSum(arr, target-arr[i], i+1)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+}

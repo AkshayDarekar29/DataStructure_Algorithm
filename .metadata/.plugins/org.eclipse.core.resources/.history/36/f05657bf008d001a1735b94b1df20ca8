@@ -1,0 +1,87 @@
+package backtracking.RatInMaze;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class RatInMaze {
+	
+	public static void main(String args[]) 
+    { 
+		RatInMaze obj = new RatInMaze();
+		int [][] matrix = { { 1, 1, 0, 0, 0 }, 
+			                { 1, 1, 1, 0, 0 }, 
+			                { 1, 0, 1, 1, 0}, 
+			                { 1, 0, 0, 1, 1 }, 
+			                { 1, 0, 1, 1, 1 } };
+		ArrayList<String> sList = obj.solve(matrix);
+		for(String s : sList){
+			System.out.println(s);
+			System.out.println();
+		}		
+    }
+
+	/*
+	 * Approach 1 : Backtracking
+	 * Time Complexity: O(8^(m*n)) 
+	 * Space Complexity: O(m*n)
+	 */
+	private ArrayList<String> solve(int[][] matrix){
+		int[] xMove = {0,1,0,-1};		
+		int[] yMove = {1,0,-1,0};
+		int x = 0;
+		int y = 0;
+		ArrayList<String> res = new ArrayList<>();
+	    solveMaze(matrix,x,y,0,0,xMove,yMove, new ArrayList<String>(), res);
+		return res;
+	} 
+	private boolean solveMaze(int[][] matrix, int oldX, int oldY, int x, int y,int[] xMove, int[] yMove, ArrayList<String> list, ArrayList<String> res) {
+		if(x == matrix.length-1 && y == matrix[0].length-1){
+			StringBuilder sb = new StringBuilder();
+			list.forEach(s -> sb.append(s));
+			res.add(sb.toString());
+			return false;
+		}else{
+			for (int i = 0; i < 4; i++) {
+				int newX =  x + xMove[i];
+				int newY =  y + yMove[i];
+				
+				if(isSafe(matrix, oldX, oldY, newX, newY, list)){
+					
+					switch(i){
+						case 0 :
+							list.add("R");
+							break;
+						case 1 :
+							list.add("D");
+							break;
+						case 2 :
+							list.add("L");
+							break;
+						case 3 :
+							list.add("U");
+							break;
+					}
+					if(solveMaze(matrix, x, y, newX, newY, xMove, yMove, list, res)){
+						return true;
+					}else{
+						list.remove(list.size()-1);
+					}
+					
+					
+				}
+			}
+			return false;
+		}
+	}
+
+	private boolean isSafe(int[][] matrix, int x, int y, int newX, int newY, ArrayList<String> s) {
+		if(x == newX && y == newY){
+			return false;
+		}else if( newX >=0 && newX < matrix.length && newY >=0 && newY < matrix[0].length && matrix[newX][newY] == 1){
+			return true;
+		}
+		return false;
+	}
+
+}

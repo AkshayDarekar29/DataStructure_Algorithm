@@ -1,0 +1,13 @@
+package string.Anagram;
+
+
+public class Anagram {
+	public static void main(String[] args) {
+		Anagram obj = new Anagram();
+		obj.printAllPermutations("ABCA");
+		System.out.println("Total "+ obj.counter);
+	}
+
+
+}
+

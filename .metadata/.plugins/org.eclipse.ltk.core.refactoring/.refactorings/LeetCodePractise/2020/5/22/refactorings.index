@@ -1,0 +1,35 @@
+1590300806081	Copy package
+1590300816770	Rename type 'MinimumPathSum'
+1590300823690	Rename resource 'MinimumPathSum_Description'
+1590320372242	Copy package
+1590320381461	Rename type 'FibonacciNumber'
+1590320387454	Rename resource 'FibonacciNumber_Description'
+1590322368945	Copy package
+1590322374736	Rename package 'dynamicProgramming.UniqueBST._2'
+1590322382492	Rename type 'UniqueBST'
+1590322390043	Rename resource 'UniqueBST_Description'
+1590501837042	Copy package
+1590501851832	Delete element
+1590501856818	Rename resource 'ThreeSum_Description'
+1590501865686	Rename type 'ThreeSum_Solution'
+1590501881493	Rename resource 'ImplementTrie'
+1590501943961	Rename compilation unit 'ImplementTrie.java'
+1590502001056	Copy package
+1590505247959	Copy package
+1590505256806	Rename type 'CoinChange'
+1590505261864	Rename resource 'CoinChange_Description'
+1590827036671	Copy package
+1590827059630	Rename type 'FindMedianOfInputStream'
+1590827066592	Rename resource 'FindMedianOfInputStream_Description'
+1590829410841	Copy package
+1590829430765	Rename type 'FindJudgeInTown'
+1590829443710	Rename resource 'FindJudgeInTown_Description'
+1590829670645	Copy package
+1590829675645	Rename type 'FindJudgeInTown'
+1590829686049	Rename resource 'FindJudgeInTown_Description'
+1590837593930	Copy package
+1590837598801	Rename type 'IsGraphBipartite'
+1590837605129	Rename resource 'IsGraphBipartite_Description'
+1590847784402	Copy package
+1590847790207	Rename type 'NumberOfIslands'
+1590847796093	Rename resource 'NumberOfIslands_Description'

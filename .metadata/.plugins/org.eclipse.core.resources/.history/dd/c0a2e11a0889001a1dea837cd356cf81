@@ -1,0 +1,87 @@
+package stack.InfixEvaluation;
+
+import java.util.HashSet;
+import java.util.Stack;
+
+public class InfixEvaluation {
+	public static void main(String[] args) {
+		InfixEvaluation obj = new InfixEvaluation();
+		String exp = "100*2+4-4+20/4";
+		int result = obj.evaluateInfix(exp);
+		System.out.println(result);
+	}
+
+	private int evaluateInfix(String exp) {
+		
+		char[] tokens = exp.toCharArray();
+		Stack<Integer> values =  new Stack<>();	
+		Stack<Character> Ops =  new Stack<>();
+		HashSet<Character> opsSet = new HashSet<>();
+		opsSet.add('+');
+		opsSet.add('-');
+		opsSet.add('*');
+		opsSet.add('/');
+		for (int i = 0; i < tokens.length; i++) {
+			
+			if(tokens[i] == ' '){
+				continue;
+			}
+			
+			if(tokens[i] >= '0' && tokens[i] <= '9'){
+				StringBuilder sb = new StringBuilder();	
+				while(i<tokens.length && tokens[i] >= '0' && tokens[i] <= '9'){
+					sb.append(tokens[i++]);
+				}
+				values.push(Integer.parseInt(sb.toString()));
+			}
+			if(tokens[i] == '('){
+				Ops.push(tokens[i]);
+			}
+			if(tokens[i] == ')'){
+				while(!Ops.empty() && Ops.peek() != '('){
+					int result = applyOperation(values.pop(), values.pop(), Ops.pop() );
+					values.push(result);
+				}
+				Ops.pop();
+			}
+			if(opsSet.contains(tokens[i])){
+				while(!Ops.empty() && hasPrecedence(tokens[i], Ops.peek())){
+					int result = applyOperation(values.pop(), values.pop(), Ops.pop());
+					values.push(result);
+				}
+				Ops.push(tokens[i]);
+			}
+		}
+		while(!Ops.empty()){
+			int result = applyOperation(values.pop(), values.pop(), Ops.pop());
+			values.push(result);
+		}
+		return values.pop();
+	}
+
+	private boolean hasPrecedence(char c, Character peek) {
+		if( peek == '(' || peek == '('){
+			return false;
+		}else if((c == '*' || c == '/') && (peek == '+' || peek == '-')){
+			return false;
+		}
+		return true;
+	}
+
+	private int applyOperation(Integer n2, Integer n1, Character operator) {
+		switch(operator){
+			case '+':
+				return n1+n2;
+			case '-':
+				return n1-n2;
+			case '*':
+				return n1*n2;
+			case '/':
+				if(n2 == 0){
+					throw new UnsupportedOperationException();
+				}
+				return n1/n2;
+		}
+		return 0;
+	}
+}

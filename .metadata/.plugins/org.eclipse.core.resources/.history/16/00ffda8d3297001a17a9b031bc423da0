@@ -1,0 +1,48 @@
+ package dynamicProgramming.NthCatalanNumber;
+
+import java.util.Arrays;
+
+public class NthCatalanNumber {
+	public static void main(String[] args) {
+		NthCatalanNumber obj = new NthCatalanNumber();
+		int num = obj.findNthCatalanNumber_2(5);
+		System.out.println(num);
+		System.out.println(obj.count);
+	}
+	/*Approach 1 : Without DP
+	 * Time Complexity: Exponential
+	 * Space Complexity: O(1)
+	*/
+	public int findNthCatalanNumber(int n){
+		int res = 0;
+		if(n <= 1){
+			return 1;
+		}
+		for(int i = 0; i<n; i++){
+			res = res + findNthCatalanNumber(i) * findNthCatalanNumber(n-i-1);
+		}
+		return res;
+	}
+	
+	/*Approach 2 : with DP - Top-Down
+	 * Time Complexity: O(n2)
+	 * Space Complexity: O(n)
+	*/
+	int C[] = new int[11];
+	int count = 0;
+	public int findNthCatalanNumber_2(int n){
+		if(C[n] == 0){
+			if(n <= 1){
+				C[n] = 1;
+			}else{
+				int res = 0;
+				for(int i = 0; i<n; i++){
+					res = res + findNthCatalanNumber_2(i) * findNthCatalanNumber_2(n-i-1);
+				}
+				C[n] = res;
+			}
+			count++;
+		}
+		return C[n];
+	}
+}

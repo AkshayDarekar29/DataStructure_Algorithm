@@ -1,0 +1,24 @@
+package patternSearch;
+
+public class RabinKarp {
+	public static void main(String args[]) 
+    { 
+        String txt = "ABABDABACDABABCABAB"; 
+        String pat = "ABABCABAB"; 
+        int q = 101;
+        new RabinKarp().search(pat, txt, q); 
+    }
+
+	private void search(String pat, String txt, int q) {
+		int m = pat.length();
+		int n = txt.length();
+		
+		int p = 0, t = 0;
+		int h = 1;
+		int i,j;
+		
+		for (i = 0; i < pat.length(); i++) {
+			
+		}
+	} 
+}

@@ -1,0 +1,89 @@
+package stack.LargestRectangleInHistogram;
+
+import java.util.Arrays;
+import java.util.Stack;
+
+public class LargestRectangleInHistogram {
+	
+	/*
+	 * Approach 2 : Using stack - store elements(which? -left most larger and right most larger) positions in left and right array
+	 * Time Complexity: O(n) 
+	 * Space Complexity: O(n)
+	 */
+	public static void main(String[] args) {
+		LargestRectangleInHistogram obj = new LargestRectangleInHistogram();
+		int[] arr = {2,1,5,6,2,3};
+		int x = obj.largestRectangleArea_2(arr);
+		System.out.println(x);
+	}
+	
+	public int largestRectangleArea_2(int[] A) {
+        
+        Stack<Integer> s = new Stack<>();
+        
+        /* Precompute left end of rectangle for each bar at index i */
+        
+        int[] leftEnd = new int[A.length];
+        
+        for(int i=0; i < A.length; i++){
+            
+            while(!s.empty() && A[s.peek()] >= A[i]){
+                s.pop();
+            } 
+            leftEnd[i] = s.empty() ? 0 : (s.peek() + 1);
+            s.push(i);
+        }
+        System.out.println(Arrays.toString(leftEnd));
+        /* Empty the stack */
+        while(!s.empty()) s.pop();
+        
+        /* Precompute right end of rectangle for each bar at index i */
+        
+        int[] rightEnd = new int[A.length];
+        
+        for(int i=A.length-1; i >= 0; i--){
+            
+            while(!s.empty() && A[s.peek()] >= A[i])
+                s.pop();
+                
+            rightEnd[i] = s.empty() ? A.length-1 : (s.peek() - 1);
+            
+            s.push(i);
+        }
+        
+        System.out.println(Arrays.toString(rightEnd));
+        
+        /* Compute Maximum area possible for each bar */
+        int maxarea = 0;
+        for(int i = 0; i < A.length; i++){
+            int area = (rightEnd[i] - leftEnd[i] + 1) * A[i];
+            maxarea = Math.max(maxarea, area);
+        }
+        
+        return maxarea;
+        
+    }
+
+	/*
+	 * Approach 1 : Brute-Force
+	 * Time Complexity: O(n2) 
+	 * Space Complexity: O(1)
+	 */
+	public int largestRectangleArea(int[] heights) {
+        int max_rectangle = 0;
+        
+        for(int i=0; i<heights.length; i++){
+           int  H  = heights[i];
+            int L = i;
+            int R = i;
+            while(L >= 0 && heights[L] >= H){
+                L--;   
+            }
+            while(R < heights.length && heights[R] >= H){
+                R++;   
+            }
+            max_rectangle = Math.max(max_rectangle, (R - L - 1) * H);
+        }
+        return max_rectangle;
+    }
+}

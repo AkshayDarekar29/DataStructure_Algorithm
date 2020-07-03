@@ -1,0 +1,15 @@
+ package dynamicProgramming.Knapsack_0_1;
+
+import java.util.Arrays;
+
+public class Knapsack_0_1 {
+	public static void main(String[] args) {
+		Knapsack_0_1 obj = new Knapsack_0_1();
+	
+	}
+	
+	/*Approach 1 : 
+	 * Time Complexity: 
+	 * Space Complexity: O(1)
+	*/
+	}

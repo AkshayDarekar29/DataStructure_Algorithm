@@ -1,0 +1,52 @@
+package general;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class Test {
+	public static void main(String[] args) {
+		Test obj = new Test();
+		
+	}
+	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        
+        HashMap<String, Integer> map = new HashMap<>();
+        Queue<String> q = new LinkedList<>();
+        q.offer(beginWord);
+        int beginLevel = 0;            
+        map.put(beginWord, 0);
+        Set<String> wordSet = wordList.stream().collect(Collectors.toSet());
+        
+        if(!wordSet.contains(endWord))
+            return 0;
+        while(!q.isEmpty()){
+            int len = q.size();
+            beginLevel++;
+            String s = q.poll();
+            for(int k=0; k < len; k++){
+                for(int i = 0 ; i < s.length() ; i++) {
+                    for(char c = 'a' ; c <= 'z' ; c++) {
+                        String transformed = s.substring(0, i) + (char) c + s.substring(i + 1, s.length());
+                        if(!wordSet.contains(transformed))
+                            continue;
+                        if(!map.containsKey(transformed)) {
+                            q.add(transformed);
+                        }else{
+                            if( map.get(transformed) > beginLevel){
+                                map.put(transformed, beginLevel);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(map.containsKey(endWord)){
+            return map.get(endWord);
+        }   
+        return 0;
+    }
+}

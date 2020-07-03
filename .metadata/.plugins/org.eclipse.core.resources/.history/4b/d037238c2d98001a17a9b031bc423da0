@@ -1,0 +1,83 @@
+package stack.RemoveAllAdjucentDuplicatesFromString_2;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Stack;
+
+public class RemoveAllAdjucentDuplicatesFromString_2 {
+	public static void main(String[] args) {
+		RemoveAllAdjucentDuplicatesFromString_2 obj = new RemoveAllAdjucentDuplicatesFromString_2();
+	}
+	/*
+	 * Approach 1 : Using one Stack and OPPs
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	 */
+	public String removeDuplicates(String s, int k) {
+        Stack<Node> stack = new Stack<>();
+        for(int i = 0; i< s.length(); i++){
+            char c = s.charAt(i);
+            if(stack.empty() || stack.peek().ch != c){
+                stack.push(new Node(c, 1));
+            }else{
+                stack.push(new Node(c, stack.peek().count + 1));
+            }
+            
+           int currEleCount = stack.peek().count;
+           if(currEleCount == k){
+                while(!stack.empty() && stack.peek().ch == c){
+                    stack.pop();
+                }
+           }
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!stack.empty()){
+            sb.append(stack.pop().ch);
+        }
+        return sb.reverse().toString();
+    }
+                        
+    class Node{
+        public Character ch;
+        public int count;
+
+        public Node(Character ch, int count){
+            this.ch = ch;
+            this.count = count;
+        }
+    } 
+    
+    
+    /*
+	 * Approach 1 : Using one Stack and OPPs
+	 * Time Complexity: O(n)
+	 * Space Complexity: O(n)
+	 */
+    public String removeDuplicates_2(String s, int k) {
+        Stack<Character> charStack = new Stack<>();
+        Stack<Integer> intStack = new Stack<>();
+        for(int i = 0; i< s.length(); i++){
+            char c = s.charAt(i);
+            if(charStack.empty() || charStack.peek() != c){
+               charStack.push(c);
+               intStack.push(1);
+            }else{
+                charStack.push(c);
+                intStack.push(intStack.peek()+1);
+            }
+            
+           int currEleCount = intStack.peek();
+           if(currEleCount == k){
+                while(!charStack.empty() && charStack.peek() == c){
+                    charStack.pop();
+                    intStack.pop();
+                }
+           }
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!charStack.empty()){
+            sb.append(charStack.pop());
+        }
+        return sb.reverse().toString();
+    }
+}

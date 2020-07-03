@@ -1,0 +1,15 @@
+package heap.MergeKSortedArray;
+
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+public class MergeKSortedArray {
+	
+	
+	/* Approach : MinHeap
+	 * Time Complexity : nLog(n)
+	 * Space Complexity : O(k)
+	 */
+	
+	
+}
