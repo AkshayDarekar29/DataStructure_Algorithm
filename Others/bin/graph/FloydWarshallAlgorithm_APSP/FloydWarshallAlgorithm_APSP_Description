@@ -1,0 +1,4 @@
+* Applicable for Acyclic or Cyclic, + or - weighted Graph.
+* Time Complexity is O(V^3).
+* Can be used to find Shortest Path from All Source
+* Can be used find -ve cycles in graph

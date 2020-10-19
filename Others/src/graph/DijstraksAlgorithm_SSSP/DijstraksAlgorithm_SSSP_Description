@@ -1,0 +1,3 @@
+* Applicable for Acyclic and Cyclic weighted Graph.
+* Time Complexity is O(E * Log(V)).
+* Edges should have + values

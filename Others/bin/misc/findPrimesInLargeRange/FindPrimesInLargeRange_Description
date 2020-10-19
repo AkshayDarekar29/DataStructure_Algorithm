@@ -1,0 +1,19 @@
+Segmented Sieve (Print Primes in a Range)
+Given a range [low, high], print all primes in this range? For example, if the given range is [10, 20], then output is 11, 13, 17, 19.
+
+A Naive approach is to run a loop from low to high and check each number for primeness.
+
+A Better Approach is to precalculate primes upto the maximum limit using Sieve of Eratosthenes, then print all prime numbers in range.
+
+The above approach looks good, but consider the input range [50000, 55000]. the above Sieve approach would precalculate primes from 2 to 50100. This causes a waste of memory as well as time. Below is Segmeented Sieve based approach.
+
+Segmented Sieve (Background)
+Below are basic steps to get idea how Segmented Sieve works
+
+
+
+
+Use Simple Sieve to find all primes upto a predefined limit (square root of ‘high’ is used in below code) and store these primes in an array “prime[]”. Basically we call Simple Sieve for a limit and we not only find prime numbers, but also puts them in a separate array prime[].
+Create an array mark[high-low+1]. Here we need only O(n) space where n is number of elements in given range.
+Iterate through all primes found in step 1. For every prime, mark its multiples in given range [low..high].
+So unlike simple sieve, we don’t check for all multiples of every number smaller than square root of high, we only check for multiples of primes found in step 1. And we don’t need O(high) space, we need O(sqrt(high) + n) space.

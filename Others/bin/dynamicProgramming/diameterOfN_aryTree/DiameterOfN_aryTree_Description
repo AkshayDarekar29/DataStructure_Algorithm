@@ -1,0 +1,11 @@
+Diameter of an N-ary tree
+Last Updated: 31-12-2019
+The diameter of an N-ary tree is the longest path present between any two nodes of the tree. These two nodes must be two leaf nodes. The following examples have the longest path[diameter] shaded.
+
+Example 1:
+diameternary
+
+Example 2:
+diametern 2
+
+https://www.geeksforgeeks.org/diameter-n-ary-tree/

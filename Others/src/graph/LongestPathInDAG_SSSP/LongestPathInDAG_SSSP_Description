@@ -1,0 +1,3 @@
+On general graph this problem is NP-Hard but on a DAG this problem is solvable in O(V+E).
+
+The trick is to use logic of finding Shortest Path in DAG by multiplying every edge by -1 and finding shortest path and then multiply the values by -1 again to get longest distance.
